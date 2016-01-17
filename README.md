@@ -1,2 +1,2 @@
 # ApGraphics
-ApGraphics - opengl渲染引擎联系第二弹
+ApGraphics - opengl渲染引擎练习第二弹
