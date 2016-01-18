@@ -132,24 +132,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ApGraphics\constants\color.h" />
     <ClInclude Include="ApGraphics\constants\context.h" />
     <ClInclude Include="ApGraphics\constants\deletemacros.h" />
     <ClInclude Include="ApGraphics\constants\iostream.h" />
     <ClInclude Include="ApGraphics\constants\string.h" />
     <ClInclude Include="ApGraphics\core\main\WinMain.h" />
     <ClInclude Include="ApGraphics\core\main\Engine.h" />
-    <ClInclude Include="ApGraphics\core\graph\UObject.h" />
+    <ClInclude Include="ApGraphics\core\base\UObject.h" />
     <ClInclude Include="ApGraphics\core\system\System.h" />
     <ClInclude Include="ApGraphics\core\system\Game.h" />
     <ClInclude Include="ApGraphics\core\system\Window.h" />
+    <ClInclude Include="ApGraphics\maths\Mat4f.h" />
+    <ClInclude Include="ApGraphics\maths\maths.h" />
+    <ClInclude Include="ApGraphics\maths\mathUtils.h" />
+    <ClInclude Include="ApGraphics\maths\Vec2f.h" />
+    <ClInclude Include="ApGraphics\maths\Vec3f.h" />
+    <ClInclude Include="ApGraphics\maths\Vec4f.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ApGraphics\core\main\WinMain.cpp" />
     <ClCompile Include="ApGraphics\core\main\Engine.cpp" />
-    <ClCompile Include="ApGraphics\core\graph\UObject.cpp" />
+    <ClCompile Include="ApGraphics\core\base\UObject.cpp" />
     <ClCompile Include="ApGraphics\core\system\System.cpp" />
     <ClCompile Include="ApGraphics\core\system\Game.cpp" />
     <ClCompile Include="ApGraphics\core\system\Window.cpp" />
+    <ClCompile Include="ApGraphics\maths\Mat4f.cpp" />
+    <ClCompile Include="ApGraphics\maths\Vec2f.cpp" />
+    <ClCompile Include="ApGraphics\maths\Vec3f.cpp" />
+    <ClCompile Include="ApGraphics\maths\Vec4f.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

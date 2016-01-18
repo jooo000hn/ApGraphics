@@ -12,12 +12,12 @@ UObject::UObject(const std::tstring& name)
 
 
 UObject::UObject()
-	:m_Name(std::tstring("")), m_ID(m_objectAmount), m_bIsInitialized(false)
+	:m_Name(_T("")), m_ID(m_objectAmount), m_bIsInitialized(false)
 	, m_bIsPostInitialized(false), m_bIsContentLoaded(false)
 	, m_bIsPostContentLoaded(false), m_bIsDestroyed(false)
 	, m_bCanTick(true), m_bCanDraw(true)
 {
-	m_Name = std::tstring("Object_") + TOSTRING(m_ID);
+	m_Name = _T("Object_") + TOSTRING(m_ID);
 	++m_objectAmount;
 }
 

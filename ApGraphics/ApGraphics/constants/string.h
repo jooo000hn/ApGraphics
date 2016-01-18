@@ -11,7 +11,7 @@
 #endif
 
 // Defines
-#ifndef UNICODE
+#ifdef UNICODE
 	#define  tstring wstring
 	#define TOSTRING(value) std::to_wstring(value)
 #else

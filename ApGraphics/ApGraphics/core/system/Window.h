@@ -18,7 +18,7 @@
 struct WindowData : public SystemData
 {
 	WindowData();
-	WindowData(int width, int height, std::tstring& title = std::tstring("ApEngine"), int b = 32, bool fullScreen = false );
+	WindowData(int width, int height, const std::tstring& title = _T("ApEngine"), int b = 32, bool fullScreen = false );
 
 	int width;
 	int height;
@@ -30,7 +30,7 @@ struct WindowData : public SystemData
 struct ResizeData
 {
 	ResizeData();
-	ResizeData(int resize, int newWidth, int newHeight);
+	ResizeData(bool resize, int newWidth, int newHeight);
 
 	bool mustResize;
 
@@ -42,12 +42,16 @@ class Window : public System
 {
 	friend class Engine;
 public:
+
+	// get
 	int GetWidth();
 	int GetHeight();
 	HWND GetWindowHandle();
 	HDC GetDiviceContext();
 	HINSTANCE GetInstance();
 	ResizeData& GetResizeData() { return m_ResizeData; }
+
+	// event
 	LRESULT HandleEvent(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 protected:
@@ -69,7 +73,7 @@ private:
 
 	int m_Width;
 	int m_Height;
-	int m_bits;
+	int m_Bits;
 	bool m_bFullScreen;
 	std::tstring m_Title;
 };

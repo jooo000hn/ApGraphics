@@ -1,7 +1,7 @@
 #ifndef _SYSTEM_H
 #define _SYSTEM_H
 
-#include "../graph/UObject.h"
+#include "../base/UObject.h"
 #ifndef _CONTEXT_H
 	#include "../../constants/context.h"
 #endif

@@ -9,6 +9,7 @@
 
 #include "../system/System.h"
 #include "../system/Game.h"
+#include "../system/Window.h"
 
 EngineState Engine::m_EngineState = EngineState::Invalid;
 Engine::Engine()
@@ -72,17 +73,34 @@ int Engine::Initialize()
 	}
 
 	// add some system
+	if (!AddSystem(new Window(WindowData(960, 540))))
+	{
+		return false;
+	}
+	// init system
+	if (!m_mapSystem[SystemType::Sys_Window]->Initialize())
+	{
+		return false;
+	}
 
 	return true;
 }
 
-int Engine::Draw(const Context& context)
+int Engine::Draw(Context& context)
 {
 	return true;
 }
 
-int Engine::Update(const Context& context)
+int Engine::Update(Context& context)
 {
+	for (std::pair<SystemType, System*> pSys : m_mapSystem)
+	{
+		if (!pSys.second)
+		{
+			continue;
+		}
+		pSys.second->Update(context);
+	}
 	return true;
 }
 
