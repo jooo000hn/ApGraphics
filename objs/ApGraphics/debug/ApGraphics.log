@@ -1,2 +1,31 @@
-﻿  Engine.cpp
+﻿  main.cpp
+  Shader.cpp
+  正在生成代码...
+Mesh.obj : warning LNK4049: 已导入本地定义的符号 ___glewBindBuffer
+Mesh.obj : warning LNK4049: 已导入本地定义的符号 ___glewBufferData
+Mesh.obj : warning LNK4049: 已导入本地定义的符号 ___glewGenBuffers
+Mesh.obj : warning LNK4049: 已导入本地定义的符号 ___glewDisableVertexAttribArray
+Mesh.obj : warning LNK4049: 已导入本地定义的符号 ___glewEnableVertexAttribArray
+Mesh.obj : warning LNK4049: 已导入本地定义的符号 ___glewVertexAttribPointer
+Shader.obj : warning LNK4049: 已导入本地定义的符号 ___glewAttachShader
+Shader.obj : warning LNK4049: 已导入本地定义的符号 ___glewCompileShader
+Shader.obj : warning LNK4049: 已导入本地定义的符号 ___glewCreateProgram
+Shader.obj : warning LNK4049: 已导入本地定义的符号 ___glewCreateShader
+Shader.obj : warning LNK4049: 已导入本地定义的符号 ___glewDeleteShader
+Shader.obj : warning LNK4049: 已导入本地定义的符号 ___glewGetShaderInfoLog
+Shader.obj : warning LNK4049: 已导入本地定义的符号 ___glewGetShaderiv
+Shader.obj : warning LNK4049: 已导入本地定义的符号 ___glewGetUniformLocation
+Shader.obj : warning LNK4049: 已导入本地定义的符号 ___glewLinkProgram
+Shader.obj : warning LNK4049: 已导入本地定义的符号 ___glewShaderSource
+Shader.obj : warning LNK4049: 已导入本地定义的符号 ___glewUniform1f
+Shader.obj : warning LNK4049: 已导入本地定义的符号 ___glewUniform1fv
+Shader.obj : warning LNK4049: 已导入本地定义的符号 ___glewUniform1i
+Shader.obj : warning LNK4049: 已导入本地定义的符号 ___glewUniform1iv
+Shader.obj : warning LNK4049: 已导入本地定义的符号 ___glewUniform2f
+Shader.obj : warning LNK4049: 已导入本地定义的符号 ___glewUniform3f
+Shader.obj : warning LNK4049: 已导入本地定义的符号 ___glewUniform4f
+Shader.obj : warning LNK4049: 已导入本地定义的符号 ___glewUniformMatrix4fv
+Shader.obj : warning LNK4049: 已导入本地定义的符号 ___glewUseProgram
+Shader.obj : warning LNK4049: 已导入本地定义的符号 ___glewValidateProgram
+glew32s.lib(glew.obj) : warning LNK4099: 未找到 PDB“glew_static.pdb”(使用“glew32s.lib(glew.obj)”或在“E:\学习资料\opengl\ApGraphics\bin\ApGraphics\Debug\glew_static.pdb”中寻找)；正在链接对象，如同没有调试信息一样
   ApGraphics.vcxproj -> E:\学习资料\opengl\ApGraphics\bin\ApGraphics\Debug\ApGraphics.exe

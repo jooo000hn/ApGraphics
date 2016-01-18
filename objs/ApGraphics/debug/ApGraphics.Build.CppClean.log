@@ -1,10 +1,11 @@
 e:\学习资料\opengl\apgraphics\objs\apgraphics\debug\vc140.pdb
 e:\学习资料\opengl\apgraphics\objs\apgraphics\debug\vc140.idb
-e:\学习资料\opengl\apgraphics\objs\apgraphics\debug\winmain.obj
-e:\学习资料\opengl\apgraphics\objs\apgraphics\debug\engine.obj
-e:\学习资料\opengl\apgraphics\objs\apgraphics\debug\uobject.obj
-e:\学习资料\opengl\apgraphics\objs\apgraphics\debug\system.obj
-e:\学习资料\opengl\apgraphics\objs\apgraphics\debug\game.obj
+e:\学习资料\opengl\apgraphics\objs\apgraphics\debug\main.obj
+e:\学习资料\opengl\apgraphics\objs\apgraphics\debug\log.obj
+e:\学习资料\opengl\apgraphics\objs\apgraphics\debug\mat4.obj
+e:\学习资料\opengl\apgraphics\objs\apgraphics\debug\vec2.obj
+e:\学习资料\opengl\apgraphics\objs\apgraphics\debug\vec3.obj
+e:\学习资料\opengl\apgraphics\objs\apgraphics\debug\vec4.obj
 e:\学习资料\opengl\apgraphics\objs\apgraphics\debug\window.obj
 e:\学习资料\opengl\apgraphics\bin\apgraphics\debug\apgraphics.ilk
 e:\学习资料\opengl\apgraphics\bin\apgraphics\debug\apgraphics.exe

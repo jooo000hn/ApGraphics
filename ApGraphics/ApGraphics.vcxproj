@@ -71,25 +71,27 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)bin\ApGraphics\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)objs\ApGraphics\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)dependencies\glew\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)dependencies\glew\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)dependencies\glew\include;$(SolutionDir)dependencies\glfw\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)dependencies\glew\lib;$(SolutionDir)dependencies\glfw\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)bin\ApGraphics\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)objs\ApGraphics\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)dependencies\glew\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)dependencies\glew\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)dependencies\glew\include;$(SolutionDir)dependencies\glfw\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)dependencies\glew\lib;$(SolutionDir)dependencies\glfw\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32s.lib;opengl32.lib;glfw3d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -109,12 +111,14 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>No</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32s.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -132,35 +136,37 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ApGraphics\constants\color.h" />
-    <ClInclude Include="ApGraphics\constants\context.h" />
-    <ClInclude Include="ApGraphics\constants\deletemacros.h" />
-    <ClInclude Include="ApGraphics\constants\iostream.h" />
-    <ClInclude Include="ApGraphics\constants\string.h" />
-    <ClInclude Include="ApGraphics\core\main\WinMain.h" />
-    <ClInclude Include="ApGraphics\core\main\Engine.h" />
-    <ClInclude Include="ApGraphics\core\base\UObject.h" />
-    <ClInclude Include="ApGraphics\core\system\System.h" />
-    <ClInclude Include="ApGraphics\core\system\Game.h" />
-    <ClInclude Include="ApGraphics\core\system\Window.h" />
-    <ClInclude Include="ApGraphics\maths\Mat4f.h" />
+    <ClInclude Include="ApGraphics\log\Log.h" />
+    <ClInclude Include="ApGraphics\maths\mat4.h" />
     <ClInclude Include="ApGraphics\maths\maths.h" />
     <ClInclude Include="ApGraphics\maths\mathUtils.h" />
-    <ClInclude Include="ApGraphics\maths\Vec2f.h" />
-    <ClInclude Include="ApGraphics\maths\Vec3f.h" />
-    <ClInclude Include="ApGraphics\maths\Vec4f.h" />
+    <ClInclude Include="ApGraphics\maths\vec2.h" />
+    <ClInclude Include="ApGraphics\maths\vec3.h" />
+    <ClInclude Include="ApGraphics\maths\vec4.h" />
+    <ClInclude Include="ApGraphics\core\window\Window.h" />
+    <ClInclude Include="ApGraphics\maths\Quaternion.h" />
+    <ClInclude Include="ApGraphics\core\graphics\Vertex.h" />
+    <ClInclude Include="ApGraphics\core\graphics\Mesh.h" />
+    <ClInclude Include="ApGraphics\utils\FileUtils.h" />
+    <ClInclude Include="ApGraphics\utils\timer.h" />
+    <ClInclude Include="ApGraphics\core\graphics\Shader.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ApGraphics\core\main\WinMain.cpp" />
-    <ClCompile Include="ApGraphics\core\main\Engine.cpp" />
-    <ClCompile Include="ApGraphics\core\base\UObject.cpp" />
-    <ClCompile Include="ApGraphics\core\system\System.cpp" />
-    <ClCompile Include="ApGraphics\core\system\Game.cpp" />
-    <ClCompile Include="ApGraphics\core\system\Window.cpp" />
-    <ClCompile Include="ApGraphics\maths\Mat4f.cpp" />
-    <ClCompile Include="ApGraphics\maths\Vec2f.cpp" />
-    <ClCompile Include="ApGraphics\maths\Vec3f.cpp" />
-    <ClCompile Include="ApGraphics\maths\Vec4f.cpp" />
+    <ClCompile Include="ApGraphics\example\main.cpp" />
+    <ClCompile Include="ApGraphics\log\Log.cpp" />
+    <ClCompile Include="ApGraphics\maths\mat4.cpp" />
+    <ClCompile Include="ApGraphics\maths\vec2.cpp" />
+    <ClCompile Include="ApGraphics\maths\vec3.cpp" />
+    <ClCompile Include="ApGraphics\maths\vec4.cpp" />
+    <ClCompile Include="ApGraphics\core\window\Window.cpp" />
+    <ClCompile Include="ApGraphics\maths\Quaternion.cpp" />
+    <ClCompile Include="ApGraphics\core\graphics\Vertex.cpp" />
+    <ClCompile Include="ApGraphics\core\graphics\Mesh.cpp" />
+    <ClCompile Include="ApGraphics\core\graphics\Shader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shaders\basic.frag" />
+    <None Include="Resources\shaders\basic.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

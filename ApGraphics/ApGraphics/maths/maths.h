@@ -14,9 +14,9 @@
 #define __MATH_H__
 
 #include <math.h>
-#include "Vec2f.h"
-#include "Vec3f.h"
-#include "Vec4f.h"
-#include "Mat4f.h"
+#include "vec2.h"
+#include "vec3.h"
+#include "vec4.h"
+#include "mat4.h"
 
 #endif // !__MATH_H__

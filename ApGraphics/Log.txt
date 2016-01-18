@@ -1,0 +1,4 @@
+<-> GLFW init success!
+<-> GLFW window create success!
+<-> GLEW init success!
+<#> OpenGL 4.5.0 NVIDIA 358.91
