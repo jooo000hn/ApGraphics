@@ -270,6 +270,11 @@ namespace apanoo {
 		return result;
 	}
 
+	apanoo::Mat4 Mat4::rotation(const Vec3& vec)
+	{
+		return Mat4(1.0);
+	}
+
 	// 目前仅相对于当前坐标系原点放缩，不是相对于物体中心放缩
 	Mat4 Mat4::scale(const Vec3& scale)
 	{

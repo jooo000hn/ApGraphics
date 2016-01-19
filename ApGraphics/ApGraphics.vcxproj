@@ -79,6 +79,7 @@
     <IntDir>$(SolutionDir)objs\ApGraphics\$(Configuration)\</IntDir>
     <IncludePath>$(SolutionDir)dependencies\glew\include;$(SolutionDir)dependencies\glfw\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)dependencies\glew\lib;$(SolutionDir)dependencies\glfw\lib;$(LibraryPath)</LibraryPath>
+    <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -86,6 +87,9 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -108,10 +112,12 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FloatingPointModel>Fast</FloatingPointModel>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>No</GenerateDebugInformation>
@@ -148,8 +154,11 @@
     <ClInclude Include="ApGraphics\core\graphics\Vertex.h" />
     <ClInclude Include="ApGraphics\core\graphics\Mesh.h" />
     <ClInclude Include="ApGraphics\utils\FileUtils.h" />
+    <ClInclude Include="ApGraphics\utils\StringUtils.h" />
     <ClInclude Include="ApGraphics\utils\timer.h" />
     <ClInclude Include="ApGraphics\core\graphics\Shader.h" />
+    <ClInclude Include="ApGraphics\core\graphics\model\Obj.h" />
+    <ClInclude Include="ApGraphics\core\graphics\Camera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ApGraphics\example\main.cpp" />
@@ -160,9 +169,10 @@
     <ClCompile Include="ApGraphics\maths\vec4.cpp" />
     <ClCompile Include="ApGraphics\core\window\Window.cpp" />
     <ClCompile Include="ApGraphics\maths\Quaternion.cpp" />
-    <ClCompile Include="ApGraphics\core\graphics\Vertex.cpp" />
     <ClCompile Include="ApGraphics\core\graphics\Mesh.cpp" />
     <ClCompile Include="ApGraphics\core\graphics\Shader.cpp" />
+    <ClCompile Include="ApGraphics\core\graphics\model\Obj.cpp" />
+    <ClCompile Include="ApGraphics\core\graphics\Camera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\basic.frag" />

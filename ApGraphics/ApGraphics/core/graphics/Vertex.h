@@ -2,12 +2,14 @@
 #include "../../maths/maths.h"
 #include "gl/glew.h"
 
+#define VERTEX_SIZE 3
 namespace apanoo {
 	struct Vertex
 	{
 	public:
-		static int VERTEX_SIZE;
 		float x, y, z;
-		Vertex(float x, float y, float z);
+		Vertex(float _x, float _y, float _z)
+			: x(_x), y(_y), z(_z)
+		{}
 	};
 }

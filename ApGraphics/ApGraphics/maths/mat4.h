@@ -47,6 +47,9 @@ namespace apanoo {
 		// 旋转矩阵
 		static Mat4 rotation(float angle, const Vec3& axis);
 
+		// 旋转矩阵 物体自身旋转
+		static Mat4 rotation(const Vec3& vec);
+
 		// 放缩矩阵
 		static Mat4 scale(const Vec3& scale);
 

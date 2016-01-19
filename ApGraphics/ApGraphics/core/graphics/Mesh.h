@@ -7,10 +7,11 @@ namespace apanoo {
 	public:
 		Mesh();
 		~Mesh();
-		void addVertices(Vertex* vertices, GLsizei count);
+		void addVertices(Vertex* vertices, GLsizei vcount, int* indices, GLsizei icount);
 		void draw();
 	private:
-		GLuint m_Vbo;
-		GLsizei m_Count;
+		GLuint m_Vbo; // vertex buffer object
+		GLuint m_Ibo; // index buffe object
+		GLsizei m_IndexCount;
 	};
 }
