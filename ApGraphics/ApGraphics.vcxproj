@@ -142,6 +142,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ApGraphics\apgraphics.h" />
+    <ClInclude Include="ApGraphics\core\core.h" />
     <ClInclude Include="ApGraphics\log\Log.h" />
     <ClInclude Include="ApGraphics\maths\mat4.h" />
     <ClInclude Include="ApGraphics\maths\maths.h" />
@@ -159,9 +161,9 @@
     <ClInclude Include="ApGraphics\core\graphics\Shader.h" />
     <ClInclude Include="ApGraphics\core\graphics\model\Obj.h" />
     <ClInclude Include="ApGraphics\core\graphics\Camera.h" />
+    <ClInclude Include="ApGraphics\core\graphics\Transform.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ApGraphics\example\main.cpp" />
     <ClCompile Include="ApGraphics\log\Log.cpp" />
     <ClCompile Include="ApGraphics\maths\mat4.cpp" />
     <ClCompile Include="ApGraphics\maths\vec2.cpp" />
@@ -173,6 +175,8 @@
     <ClCompile Include="ApGraphics\core\graphics\Shader.cpp" />
     <ClCompile Include="ApGraphics\core\graphics\model\Obj.cpp" />
     <ClCompile Include="ApGraphics\core\graphics\Camera.cpp" />
+    <ClCompile Include="ApGraphics\core\graphics\Transform.cpp" />
+    <ClCompile Include="Example\example.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\basic.frag" />

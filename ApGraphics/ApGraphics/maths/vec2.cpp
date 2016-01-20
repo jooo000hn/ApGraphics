@@ -64,38 +64,45 @@ namespace apanoo {
 	// ²Ù×÷·û
 	Vec2 operator+(Vec2 left, const Vec2& right)
 	{
-		return left.add(right);
+		Vec2 tmp = left;
+		return tmp.add(right);
 	}
 
 	Vec2 operator-(Vec2 left, const Vec2& right)
 	{
-		return left.subtract(right);
+		Vec2 tmp = left;
+		return tmp.subtract(right);
 	}
 
 	Vec2 operator*(Vec2 left, const Vec2& right)
 	{
-		return left.mutiply(right);
+		Vec2 tmp = left;
+		return tmp.mutiply(right);
 	}
 
 	Vec2 operator*(const float& left, Vec2& right)
 	{
-		return right.mutiply(left);
+		Vec2 tmp = right;
+		return tmp.mutiply(left);
 	}
 
 	Vec2 operator*(Vec2 left, const float& right)
 	{
-		return left.mutiply(right);
+		Vec2 tmp = left;
+		return tmp.mutiply(right);
 	}
 
 
 	Vec2 operator/(Vec2 left, const Vec2& right)
 	{
-		return left.divide(right);
+		Vec2 tmp = left;
+		return tmp.divide(right);
 	}
 
 	Vec2 operator/(Vec2 left, const float& right)
 	{
-		return left.divide(right);
+		Vec2 tmp = left;
+		return tmp.divide(right);
 	}
 
 	bool Vec2::operator==(const Vec2& other)

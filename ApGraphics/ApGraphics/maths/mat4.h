@@ -35,20 +35,21 @@ namespace apanoo {
 		// 单位矩阵
 		static Mat4 identity();
 
+		// camera matrix
+		static Mat4 camera(const Vec3& forward, const Vec3& up);
+
 		// 正交矩阵
 		static Mat4 orthographic(float left, float right, float bottom, float top, float near, float far);
 
-		// 透视矩阵
-		static Mat4 perspective(float fov, float aspectRatio, float near, float far);
+		// 透视投影矩阵
+		static Mat4 projection(float fov, float width, float height, float near, float far);
 
 		// 平移矩阵
 		static Mat4 translation(const Vec3& translation);
 
 		// 旋转矩阵
 		static Mat4 rotation(float angle, const Vec3& axis);
-
-		// 旋转矩阵 物体自身旋转
-		static Mat4 rotation(const Vec3& vec);
+		static Mat4 rotation(float x, float y, float z);
 
 		// 放缩矩阵
 		static Mat4 scale(const Vec3& scale);
@@ -58,7 +59,7 @@ namespace apanoo {
 		Vec3 multiply(const Vec3& vec) const;
 		Vec4 multiply(const Vec4& vec) const;
 		// 操作符
-		friend Mat4 operator*(Mat4 left, const Mat4& right);
+		friend Mat4 operator*(Mat4& left, const Mat4& right);
 		friend Vec3 operator*(const Mat4& left, const Vec3& right);
 		friend Vec4 operator*(const Mat4& left, const Vec4& right);
 		Mat4 operator*=(const Mat4& other);

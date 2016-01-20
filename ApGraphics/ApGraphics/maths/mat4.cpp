@@ -192,6 +192,38 @@ namespace apanoo {
 		return Mat4(1.0f);
 	}
 
+	// 难点
+	apanoo::Mat4 Mat4::camera(const Vec3& forward, const Vec3& up)
+	{
+		Mat4 result = Mat4(1.0);
+		Vec3 f = forward;
+		f.normalize();
+
+		Vec3 r = up;
+		r.normalize();
+
+		r = r.cross(f);
+
+		Vec3 u = f.cross(r);
+
+		// 第一列
+		result.elements[0 + 0 * 4] = r.x;
+		result.elements[0 + 1 * 4] = u.x;
+		result.elements[0 + 2 * 4] = f.x;
+		
+		// 第二列
+		result.elements[1 + 0 * 4] = r.y;
+		result.elements[1 + 1 * 4] = u.y;
+		result.elements[1 + 2 * 4] = f.y;
+
+		// 第三列
+		result.elements[2 + 0 * 4] = r.z;
+		result.elements[2 + 1 * 4] = u.z;
+		result.elements[2 + 2 * 4] = f.z;
+
+		return result;
+	}
+
 	// 难点1：正交视图矩阵
 	Mat4 Mat4::orthographic(float left, float right, float bottom, float top, float near, float far)
 	{
@@ -208,10 +240,30 @@ namespace apanoo {
 		return result;
 	}
 
-	// 难点2：透视视图矩阵
-	Mat4 Mat4::perspective(float fov, float aspectRatio, float near, float far)
+	apanoo::Mat4 Mat4::projection(float fov, float width, float height, float near, float far)
 	{
-		Mat4 result(1.0f);
+		Mat4 result = Mat4(1.0);
+		float ar = (float)((float)width / (float)height);
+		float tanHalfFOV = (float)tan(toRadians(fov / 2));
+		float zRange = near - far;
+
+		// 第一列
+		result.elements[0 + 0 * 4] = 1.0f / (tanHalfFOV * ar);
+
+		// 第二列
+		result.elements[1 + 1 * 4] = 1.0f / tanHalfFOV;
+
+		// 第三列
+		result.elements[2 + 2 * 4] = (-near - far) / zRange;
+		result.elements[2 + 3 * 4] = -1;
+
+		// 第四列
+		result.elements[3 + 2 * 4] = 2 * far * near / zRange;
+
+		return result;
+
+		/*Mat4 result(1.0f);
+		float aspectRatio = (float)width / (float)height;
 
 		float q = 1.0f / tan(toRadians(0.5f * fov));
 		float a = q / aspectRatio;
@@ -225,7 +277,7 @@ namespace apanoo {
 		result.elements[3 + 2 * 4] = -1.0f;
 		result.elements[2 + 3 * 4] = c;
 
-		return result;
+		return result;*/
 	}
 
 	// 相对于物体当前位置进行平移
@@ -270,9 +322,12 @@ namespace apanoo {
 		return result;
 	}
 
-	apanoo::Mat4 Mat4::rotation(const Vec3& vec)
+	apanoo::Mat4 Mat4::rotation(float x, float y, float z)
 	{
-		return Mat4(1.0);
+		Mat4 a = rotation(x, Vec3(1, 0, 0));
+		Mat4 b = rotation(y, Vec3(0, 1, 0));
+		Mat4 c = rotation(z, Vec3(0, 0, 1));
+		return a * b * c;
 	}
 
 	// 目前仅相对于当前坐标系原点放缩，不是相对于物体中心放缩
@@ -290,21 +345,29 @@ namespace apanoo {
 	Mat4 Mat4::operator*=(const Mat4& other)
 	{
 		return multiply(other);
-
 	}
 
-	Mat4 operator*(Mat4 left, const Mat4& right)
+	Mat4 operator*(Mat4& left, const Mat4& right)
 	{
-		return left.multiply(right);
+		Mat4 resultLeft;
+		memcpy(resultLeft.elements, left.elements, 4 * 4 * sizeof(float));
+		return resultLeft.multiply(right);
+		// return left.multiply(right);
 	}
 
 	Vec3 operator*(const Mat4& left, const Vec3& right)
 	{
-		return left.multiply(right);
+		Mat4 resultLeft;
+		memcpy(resultLeft.elements, left.elements, 4 * 4 * sizeof(float));
+		return resultLeft.multiply(right);
+		// return left.multiply(right);
 	}
 
 	Vec4 operator*(const Mat4& left, const Vec4& right)
 	{
-		return left.multiply(right);
+		Mat4 resultLeft;
+		memcpy(resultLeft.elements, left.elements, 4 * 4 * sizeof(float));
+		return resultLeft.multiply(right);
+		// return left.multiply(right);
 	}
 }

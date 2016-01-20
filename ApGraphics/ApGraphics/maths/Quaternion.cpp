@@ -2,11 +2,6 @@
 
 namespace apanoo {
 
-	Quaternion::Quaternion()
-	{
-
-	}
-
 	Quaternion::Quaternion(const float &x, const float &y, const float &z, const float &w)
 	{
 		this->x = x;
@@ -32,10 +27,8 @@ namespace apanoo {
 
 	Quaternion& Quaternion::conjugate()
 	{
-		this->x = -this->x;
-		this->y = -this->y;
-		this->z = -this->z;
-		return *this;
+		Quaternion tmp(-this->x, -this->y, -this->z, this->w);
+		return tmp;
 	}
 
 	Quaternion& Quaternion::mutiply(const Quaternion& other)
@@ -70,12 +63,14 @@ namespace apanoo {
 
 	Quaternion operator *(Quaternion left, const Quaternion& right)
 	{
-		return left.mutiply(right);
+		Quaternion tmp = left;
+		return tmp.mutiply(right);
 	}
 
 	Quaternion operator *(Quaternion left, const Vec3& vec)
 	{
-		return left.mutiply(vec);
+		Quaternion tmp = left;
+		return tmp.mutiply(vec);
 	}
 
 }

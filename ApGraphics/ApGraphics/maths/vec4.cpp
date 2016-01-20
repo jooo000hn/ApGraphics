@@ -50,22 +50,26 @@ namespace apanoo {
 	// ²Ù×÷·û
 	Vec4 operator+(Vec4 left, const Vec4& right)
 	{
-		return left.add(right);
+		Vec4 tmp = left;
+		return tmp.add(right);
 	}
 
 	Vec4 operator-(Vec4 left, const Vec4& right)
 	{
-		return left.subtract(right);
+		Vec4 tmp = left;
+		return tmp.subtract(right);
 	}
 
 	Vec4 operator*(Vec4 left, const Vec4& right)
 	{
-		return left.mutiply(right);
+		Vec4 tmp = left;
+		return tmp.mutiply(right);
 	}
 
 	Vec4 operator/(Vec4 left, const Vec4& right)
 	{
-		return left.divide(right);
+		Vec4 tmp = left;
+		return tmp.divide(right);
 	}
 
 	bool Vec4::operator==(const Vec4& other)
