@@ -1,10 +1,2 @@
-﻿  example.cpp
-e:\学习资料\opengl\apgraphics\apgraphics\example\example.cpp(56): warning C4305: “参数”: 从“double”到“const float”截断
-e:\学习资料\opengl\apgraphics\apgraphics\example\example.cpp(61): warning C4305: “参数”: 从“double”到“const float”截断
-e:\学习资料\opengl\apgraphics\apgraphics\example\example.cpp(66): warning C4305: “参数”: 从“double”到“const float”截断
-e:\学习资料\opengl\apgraphics\apgraphics\example\example.cpp(71): warning C4305: “参数”: 从“double”到“const float”截断
-e:\学习资料\opengl\apgraphics\apgraphics\example\example.cpp(78): warning C4305: “参数”: 从“double”到“float”截断
-e:\学习资料\opengl\apgraphics\apgraphics\example\example.cpp(83): warning C4305: “参数”: 从“double”到“float”截断
-e:\学习资料\opengl\apgraphics\apgraphics\example\example.cpp(88): warning C4305: “参数”: 从“double”到“float”截断
-e:\学习资料\opengl\apgraphics\apgraphics\example\example.cpp(93): warning C4305: “参数”: 从“double”到“float”截断
+﻿  Texture.cpp
   ApGraphics.vcxproj -> E:\学习资料\opengl\ApGraphics\bin\ApGraphics\Debug\ApGraphics.exe

@@ -18,6 +18,9 @@ public:
 
 	void init() override
 	{
+		glEnable(GL_TEXTURE_2D);
+		glEnable(GL_FRAMEBUFFER_SRGB);
+
 		m_Window = createWindow("ApGraphics", 960, 540);
 		shader = new Shader();
 		shader->addVertexShader("basic.vert");
@@ -32,7 +35,24 @@ public:
 		trans->setTranslation(0, 0, 1.0);
 		trans->setScale(0.5, 0.5, 0.5);
 
-		obj = new OBJ("box.obj");
+		texture = new Texture("last.bmp");
+		texture->bind();
+
+		//obj = new OBJ("box.obj");
+		Vertex data[] = {
+			Vertex(-0.5, -0.5f, 0.0f, 0, 0),
+			Vertex(-0.5f, 0.5f, 0.0f, 0, 1),
+			Vertex( 0.5f, 0.5f, 0.0f, 1, 1),
+			Vertex( 0.5f,-0.5f, 0.0f, 1, 0)
+		};
+
+		int indices[] = {
+			0, 1, 2, 
+			2, 3, 0
+		};
+
+		mesh = new Mesh();
+		mesh->addVertices(data, 4, indices, 6);
 	}
 
 	void render() override
@@ -40,7 +60,8 @@ public:
 		tme += 0.05f;
 		trans->setRotation(0, tme, 0);
 		shader->setUniformMat4("transform", trans->getProjectionTransformation());
-		obj->draw();
+		//obj->draw();
+		mesh->draw();
 	}
 
 	void tick() override
@@ -100,6 +121,8 @@ private:
 	float tme;
 	Shader* shader;
 	Transform * trans;
+	Mesh* mesh;
+	Texture* texture;
 };
 
 int main() 

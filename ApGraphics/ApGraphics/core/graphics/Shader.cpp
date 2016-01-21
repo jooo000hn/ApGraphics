@@ -3,7 +3,7 @@
 #include <vector>
 #include <iostream>
 #include "../../log/Log.h"
-#include "../../utils/FileUtils.h"
+#include "../../utils/ResourcesLoader.h"
 
 namespace apanoo {
 	Shader::Shader()
@@ -46,7 +46,7 @@ namespace apanoo {
 		}
 
 		// ∂¡»°shader
-		std::string SourceString = FileUtils::ReadShader(filename);
+		std::string SourceString = ResourcesLoader::load_shader(filename);
 		const char* source = SourceString.c_str();
 
 		glShaderSource(shader, 1, &source, NULL);

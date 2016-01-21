@@ -31,6 +31,10 @@ namespace apanoo {
 		// 启用shader中location=0的属性
 		glEnableVertexAttribArray(0);
 
+		// 纹理
+		glEnableVertexAttribArray(1);
+
+
 		glBindBuffer(GL_ARRAY_BUFFER, m_Vbo);
 
 		// 指向shader中location=0的属性
@@ -40,9 +44,13 @@ namespace apanoo {
 		// 连续2元素之间的偏移字节数,这里是每个元素的大小： Vertex::VERTEX_SIZE * sizeof(GL_FLOAT)
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, VERTEX_SIZE * sizeof(GL_FLOAT), 0);
 
+		// 纹理坐标
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, VERTEX_SIZE * sizeof(GL_FLOAT), (void *)12);
+
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_Ibo);
 		glDrawElements(GL_TRIANGLES, m_IndexCount, GL_UNSIGNED_INT, 0);
 
 		glDisableVertexAttribArray(0);
+		glDisableVertexAttribArray(1);
 	}
 }
