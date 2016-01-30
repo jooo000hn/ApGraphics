@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ApGraphics", "ApGraphics\ApGraphics.vcxproj", "{0BBC6ADA-23C2-42D0-81A8-3638E1494E42}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ApGraphics", "src\ApGraphics.vcxproj", "{0BBC6ADA-23C2-42D0-81A8-3638E1494E42}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,11 +14,9 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{0BBC6ADA-23C2-42D0-81A8-3638E1494E42}.Debug|x64.ActiveCfg = Debug|x64
-		{0BBC6ADA-23C2-42D0-81A8-3638E1494E42}.Debug|x64.Build.0 = Debug|x64
 		{0BBC6ADA-23C2-42D0-81A8-3638E1494E42}.Debug|x86.ActiveCfg = Debug|Win32
 		{0BBC6ADA-23C2-42D0-81A8-3638E1494E42}.Debug|x86.Build.0 = Debug|Win32
 		{0BBC6ADA-23C2-42D0-81A8-3638E1494E42}.Release|x64.ActiveCfg = Release|x64
-		{0BBC6ADA-23C2-42D0-81A8-3638E1494E42}.Release|x64.Build.0 = Release|x64
 		{0BBC6ADA-23C2-42D0-81A8-3638E1494E42}.Release|x86.ActiveCfg = Release|Win32
 		{0BBC6ADA-23C2-42D0-81A8-3638E1494E42}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
