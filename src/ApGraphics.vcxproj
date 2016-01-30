@@ -168,8 +168,7 @@
     <ClInclude Include="ApGraphics\log\Log.h" />
     <ClInclude Include="ApGraphics\core\window\Window.h" />
     <ClInclude Include="ApGraphics\core\graphics\Vertex.h" />
-    <ClInclude Include="ApGraphics\maths\maths.h" />
-    <ClInclude Include="ApGraphics\maths\MathTools.h" />
+    <ClInclude Include="ApGraphics\maths\Maths.h" />
     <ClInclude Include="ApGraphics\maths\Matrix4.h" />
     <ClInclude Include="ApGraphics\maths\Quaternion.h" />
     <ClInclude Include="ApGraphics\maths\Vector2.h" />

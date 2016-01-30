@@ -24,13 +24,13 @@ namespace apanoo {
 		inline Vector3& getForward() { return m_Forward; }
 		inline Vector3& getUp() { return m_Up; }
 
-		void setPosition(Vector3& position) { m_Position = position; }
-		void setForward(Vector3& forward) { m_Forward = forward; }
-		void setUp(Vector3& up) { m_Up = up; }
+		inline void setPosition(Vector3& position) { m_Position = position; }
+		inline void setForward(Vector3& forward) { m_Forward = forward; }
+		inline void setUp(Vector3& up) { m_Up = up; }
 	private:
-		Vector3 m_Position;
-		Vector3 m_Forward;
-		Vector3 m_Up;
+		Vector3 m_Position;  // 位置
+		Vector3 m_Forward;   // 正前方
+		Vector3 m_Up;        // 正上方
 
 	private:
 		static Vector3 yAxis;

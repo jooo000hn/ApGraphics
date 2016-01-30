@@ -52,6 +52,7 @@ namespace apanoo {
 	}
 
 	// R = L - 2 (L.dot(n)n)
+	// normal 必须为单位向量
 	Vector2 Vector2::Reflect(const Vector2& normal) const
 	{
 		return *this - (normal * (this->Dot(normal) * 2));

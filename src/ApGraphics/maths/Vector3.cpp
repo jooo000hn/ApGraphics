@@ -48,12 +48,28 @@ namespace apanoo {
 
 	Vector3 Vector3::Rotate(float angle, const Vector3& axis) const
 	{
-		const float sin = sinf(-angle);
-		const float cos = cosf(-angle);
+		// const float sin = sinf(-angle);
+		// const float cos = cosf(-angle);
 
-		return this->Cross(axis * sin) +        // Rotation on local X
-			(*this * cos) +                     // Rotation on local Z
-			axis * this->Dot(axis * (1 - cos)); // Rotation on local Y
+		// return this->Cross(axis * sin) +        // Rotation on local X
+		//	   (*this * cos) +                     // Rotation on local Z
+		//	   axis * this->Dot(axis * (1 - cos)); // Rotation on local Y
+
+		const float sinHalfAngle = sinf(angle/2);
+		const float cosHalfAngle = cosf(angle/2);
+
+		const float Rx = axis.GetX() * sinHalfAngle;
+		const float Ry = axis.GetY() * sinHalfAngle;
+		const float Rz = axis.GetZ() * sinHalfAngle;
+		const float Rw = cosHalfAngle;
+
+		Quaternion rotationQ(Rx, Ry, Rz, Rw);
+		Quaternion conjugateQ = rotationQ.Conjugate();
+		Quaternion w = rotationQ * (*this) * conjugateQ;
+
+		Vector3 ret(w.GetX(), w.GetY(), w.GetZ());
+
+		return ret;
 	}
 
 	Vector3 Vector3::Rotate(const Quaternion& rotation) const
@@ -77,6 +93,7 @@ namespace apanoo {
 	}
 
 	// R = L - 2 (L.dot(n)n)
+	// normal 必须为单位向量
 	Vector3 Vector3::Reflect(const Vector3& normal) const
 	{
 		return *this - (normal * (this->Dot(normal) * 2));

@@ -8,8 +8,6 @@ namespace apanoo {
 	{
 		m_Up = m_Up.Normalized();
 		m_Forward = m_Forward.Normalized();
-		// m_Up.normalize();
-		// m_Forward.normalize();
 	}
 
 	Camera::Camera()

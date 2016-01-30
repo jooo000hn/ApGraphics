@@ -1,5 +1,12 @@
 #pragma once
-#include "MathTools.h"
+#ifndef _INC_MATH
+	#include <math.h>
+#endif // !_INC_MATH
+
+#ifndef _IOSTREAM_
+	#include <iostream>
+#endif // !_IOSTREAM_
+
 #include "Vector3.h"
 #include "Vector4.h"
 #include "Matrix4.h"

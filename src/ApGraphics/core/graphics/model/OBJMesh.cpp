@@ -46,29 +46,20 @@ namespace apanoo {
 			if (line.size() == 0 || line[0] == '#') continue;
 			std::istringstream is(line);
 			is >> word;
-			if (word == "v")
+			if (word == "v") // 读取顶点
 			{
 				float tmpx, tmpy, tmpz;
 				is >> tmpx >> tmpy >> tmpz;
 				Vertex p(tmpx, tmpy,tmpz);
 				vector_vertexs.push_back(p);
 			}
-			else if (word == "f")
+			else if (word == "f") // 读取面
 			{
 				int r = 0, c = 0;
 				while (is >> word)
 				{
 					c = count(word.begin(), word.end(), '/');
-					if (c == 0)
-					{
-						vector_indices.push_back(atoi(word.c_str()));
-					}
-					else if (c == 1)
-					{
-						vector_indices.push_back(atoi(std::string(word.begin(), word.begin() + word.find("/")).c_str()));
-						vector_indices.push_back(atoi(std::string(word.begin() + word.find("/") + 1, word.end()).c_str()));
-					}
-					else if (c == 2)
+					if (c == 2)
 					{
 						int a = word.find("/");
 						int b = word.find("/", a + 1);
@@ -82,6 +73,7 @@ namespace apanoo {
 		}
 		in.close();
 
+		// 储存点
 		int vertCount = vector_vertexs.size();
 		Vertex** vertives = new Vertex*[vertCount];
 		for (unsigned int i = 0;i < vector_vertexs.size();i++)
@@ -89,6 +81,7 @@ namespace apanoo {
 			vertives[i] = &vector_vertexs.at(i);
 		}
 
+		// 储存面的顶点索引
 		int indexCount = vector_indices.size();
 		int* indices = new int[indexCount];
 		for (int i = 0;i < indexCount / 3;i++)
@@ -103,6 +96,6 @@ namespace apanoo {
 		addVertices(*vertives, vertCount, indices, indexCount);
 
 		delete[] vertives;
-		delete indices;
+		delete[] indices;
 	}
 }

@@ -121,7 +121,7 @@ namespace apanoo {
 		Vector3 up = Vector3(2.0f * (GetX()*GetY() + GetW()*GetZ()), 1.0f - 2.0f * (GetX()*GetX() + GetZ()*GetZ()), 2.0f * (GetY()*GetZ() - GetW()*GetX()));
 		Vector3 right = Vector3(1.0f - 2.0f * (GetY()*GetY() + GetZ()*GetZ()), 2.0f * (GetX()*GetY() - GetW()*GetZ()), 2.0f * (GetX()*GetZ() + GetW()*GetY()));
 
-		return Matrix4().RotationFromVectors(forward, up, right);
+		return Matrix4().RotationFromVectorsMatrix(forward, up, right);
 	}
 
 	Vector3 Quaternion::GetForward() const

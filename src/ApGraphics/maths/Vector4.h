@@ -1,5 +1,12 @@
 #pragma once
-#include "MathTools.h"
+#ifndef _INC_MATH
+	#include <math.h>
+#endif // !_INC_MATH
+
+#ifndef _IOSTREAM_
+	#include <iostream>
+#endif // !_IOSTREAM_
+
 namespace apanoo {
 	class Vector4
 	{
@@ -22,6 +29,7 @@ namespace apanoo {
 			(*this)[3] = w;
 		}
 
+		// set and get
 		inline float GetX() const { return (*this)[0]; }
 		inline float GetY() const { return (*this)[1]; }
 		inline float GetZ() const { return (*this)[2]; }

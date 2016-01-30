@@ -1,7 +1,14 @@
 #pragma once
+#ifndef _INC_MATH
+	#include <math.h>
+#endif // !_INC_MATH
+
+#ifndef _IOSTREAM_
+	#include <iostream>
+#endif // !_IOSTREAM_
+
 #include "Vector3.h"
 #include "Vector4.h"
-#include "MathTools.h"
 
 namespace apanoo {
 	/*
@@ -56,27 +63,30 @@ namespace apanoo {
 		}
 
 		// 单位矩阵
-		Matrix4 Identity();
+		Matrix4 IdentityMatrix();
 
 		// 放缩
-		Matrix4 Scale(const Vector3& r);
+		Matrix4 ScaleMatrix(const Vector3& r);
 
 		// 平移
-		Matrix4 Translation(const Vector3& r);
+		Matrix4 TranslationMatrix(const Vector3& r);
 
 		// 欧拉角旋转
-		Matrix4 RotationEuler(float rotateX, float rotateY, float rotateZ);
+		Matrix4 RotationEulerMatrix(float rotateX, float rotateY, float rotateZ);
 
-		Matrix4 RotationFromVectors(const Vector3& n, const Vector3& v, const Vector3& u);
+		Matrix4 RotationFromVectorsMatrix(const Vector3& n, const Vector3& v, const Vector3& u);
 
 		// 按方向旋转
-		Matrix4 RotationFromDirection(const Vector3& forward, const Vector3& up);
+		Matrix4 RotationFromDirectionMatrix(const Vector3& forward, const Vector3& up);
+
+		// Camera
+		Matrix4 CameraMatrix(const Vector3& forward, const Vector3& up);
 
 		// 透视
-		Matrix4 Perspective(float fov, float aspectRatio, float zNear, float zFar);
+		Matrix4 PerspectiveMatrix(float fov, float aspectRatio, float zNear, float zFar);
 
 		// 正交
-		Matrix4 Orthographic(float left, float right, float bottom, float top, float near, float far);
+		Matrix4 OrthographicMatrix(float left, float right, float bottom, float top, float near, float far);
 
 		// 转置
 		Matrix4 Transpose() const;

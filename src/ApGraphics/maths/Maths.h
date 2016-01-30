@@ -1,6 +1,8 @@
 #pragma once
 
-#include <math.h>
+#ifndef _INC_MATH
+	#include <math.h>
+#endif // !_INC_MATH
 
 #include "Vector2.h"
 #include "Vector3.h"
