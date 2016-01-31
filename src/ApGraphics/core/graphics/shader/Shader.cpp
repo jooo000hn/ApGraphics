@@ -2,8 +2,13 @@
 #include <string>
 #include <vector>
 #include <iostream>
+<<<<<<< HEAD:src/ApGraphics/core/graphics/shader/Shader.cpp
 #include "../../../log/Log.h"
 #include "../../../utils/FileUtils.h"
+=======
+#include "../../log/Log.h"
+#include "../../utils/ResourcesLoader.h"
+>>>>>>> origin/master:ApGraphics/ApGraphics/core/graphics/Shader.cpp
 
 namespace apanoo {
 	Shader::Shader()
@@ -46,7 +51,11 @@ namespace apanoo {
 		}
 
 		// ∂¡»°shader
+<<<<<<< HEAD:src/ApGraphics/core/graphics/shader/Shader.cpp
 		std::string SourceString = FileUtils::readShader(filename);
+=======
+		std::string SourceString = ResourcesLoader::load_shader(filename);
+>>>>>>> origin/master:ApGraphics/ApGraphics/core/graphics/Shader.cpp
 		const char* source = SourceString.c_str();
 
 		glShaderSource(shader, 1, &source, NULL);

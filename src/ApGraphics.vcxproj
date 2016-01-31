@@ -69,6 +69,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+<<<<<<< HEAD:src/ApGraphics.vcxproj
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)build\$(Configuration)\</IntDir>
     <IncludePath>$(SolutionDir)deps\glew\include;$(SolutionDir)deps\glfw\include;$(SolutionDir)deps\FreeImage\include;$(SolutionDir)deps\assimp\include;$(IncludePath)</IncludePath>
@@ -79,6 +80,18 @@
     <IntDir>$(SolutionDir)build\$(Configuration)\</IntDir>
     <IncludePath>$(SolutionDir)deps\glew\include;$(SolutionDir)deps\glfw\include;$(SolutionDir)deps\FreeImage\include;$(SolutionDir)deps\assimp\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)deps\glew\lib;$(SolutionDir)deps\glfw\lib;$(SolutionDir)deps\FreeImage\lib;$(SolutionDir)deps\assimp\lib;$(LibraryPath)</LibraryPath>
+=======
+    <OutDir>$(SolutionDir)bin\ApGraphics\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)objs\ApGraphics\$(Configuration)\</IntDir>
+    <IncludePath>$(SolutionDir)dependencies\glew\include;$(SolutionDir)dependencies\glfw\include;$(SolutionDir)dependencies\FreeImage\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)dependencies\glew\lib;$(SolutionDir)dependencies\glfw\lib;$(SolutionDir)dependencies\FreeImage\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)bin\ApGraphics\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)objs\ApGraphics\$(Configuration)\</IntDir>
+    <IncludePath>$(SolutionDir)dependencies\glew\include;$(SolutionDir)dependencies\glfw\include;$(SolutionDir)dependencies\FreeImage\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)dependencies\glew\lib;$(SolutionDir)dependencies\glfw\lib;$(SolutionDir)dependencies\FreeImage\lib;$(LibraryPath)</LibraryPath>
+>>>>>>> origin/master:ApGraphics/ApGraphics.vcxproj
     <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -105,7 +118,11 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+<<<<<<< HEAD:src/ApGraphics.vcxproj
       <AdditionalDependencies>glew32s.lib;opengl32.lib;FreeImage.lib;glfw3d.lib;assimp-vc140-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+=======
+      <AdditionalDependencies>glew32s.lib;opengl32.lib;FreeImage.lib;glfw3d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+>>>>>>> origin/master:ApGraphics/ApGraphics.vcxproj
       <SubSystem>Console</SubSystem>
       <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
     </Link>
@@ -137,7 +154,11 @@
       <GenerateDebugInformation>No</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+<<<<<<< HEAD:src/ApGraphics.vcxproj
       <AdditionalDependencies>glew32s.lib;opengl32.lib;FreeImage.lib;glfw3.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+=======
+      <AdditionalDependencies>glew32s.lib;opengl32.lib;FreeImage.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+>>>>>>> origin/master:ApGraphics/ApGraphics.vcxproj
       <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
@@ -173,6 +194,7 @@
     <ClInclude Include="ApGraphics\log\Log.h" />
     <ClInclude Include="ApGraphics\core\window\Window.h" />
     <ClInclude Include="ApGraphics\core\graphics\Vertex.h" />
+<<<<<<< HEAD:src/ApGraphics.vcxproj
     <ClInclude Include="ApGraphics\maths\Maths.h" />
     <ClInclude Include="ApGraphics\maths\Matrix4.h" />
     <ClInclude Include="ApGraphics\maths\Quaternion.h" />
@@ -182,6 +204,17 @@
     <ClInclude Include="ApGraphics\utils\FileUtils.h" />
     <ClInclude Include="ApGraphics\utils\StringUtils.h" />
     <ClInclude Include="ApGraphics\utils\timer.h" />
+=======
+    <ClInclude Include="ApGraphics\core\graphics\Mesh.h" />
+    <ClInclude Include="ApGraphics\utils\ResourcesLoader.h" />
+    <ClInclude Include="ApGraphics\utils\StringUtils.h" />
+    <ClInclude Include="ApGraphics\utils\timer.h" />
+    <ClInclude Include="ApGraphics\core\graphics\Shader.h" />
+    <ClInclude Include="ApGraphics\core\graphics\model\Obj.h" />
+    <ClInclude Include="ApGraphics\core\graphics\Camera.h" />
+    <ClInclude Include="ApGraphics\core\graphics\Transform.h" />
+    <ClInclude Include="ApGraphics\core\graphics\Texture.h" />
+>>>>>>> origin/master:ApGraphics/ApGraphics.vcxproj
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ApGraphics\core\graphics\shader\ModelShader.cpp" />
@@ -202,6 +235,7 @@
     <ClCompile Include="ApGraphics\maths\Vector3.cpp" />
     <ClCompile Include="ApGraphics\maths\Vector4.cpp" />
     <ClCompile Include="Example\example.cpp" />
+    <ClCompile Include="ApGraphics\core\graphics\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\basic.frag" />
