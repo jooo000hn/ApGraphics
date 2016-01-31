@@ -1,7 +1,7 @@
 #include "Matrix4.h"
 
 namespace apanoo {
-	Matrix4 Matrix4::IdentityMatrix()
+	Matrix4 Matrix4::identityMatrix()
 	{
 		for (unsigned int i = 0; i < 4; i++)
 		{
@@ -17,7 +17,7 @@ namespace apanoo {
 		return *this;
 	}
 
-	Matrix4 Matrix4::ScaleMatrix(const Vector3& r)
+	Matrix4 Matrix4::scaleMatrix(const Vector3& r)
 	{
 		for (unsigned int i = 0; i < 4; i++)
 		{
@@ -35,7 +35,7 @@ namespace apanoo {
 		return *this;
 	}
 
-	Matrix4 Matrix4::TranslationMatrix(const Vector3& r)
+	Matrix4 Matrix4::translationMatrix(const Vector3& r)
 	{
 		for (unsigned int i = 0; i < 4; i++)
 		{
@@ -55,7 +55,7 @@ namespace apanoo {
 		return *this;
 	}
 
-	Matrix4 Matrix4::RotationEulerMatrix(float rotateX, float rotateY, float rotateZ)
+	Matrix4 Matrix4::rotationEulerMatrix(float rotateX, float rotateY, float rotateZ)
 	{
 		Matrix4 rx, ry, rz;
 
@@ -86,45 +86,45 @@ namespace apanoo {
 		return *this;
 	}
 
-	Matrix4 Matrix4::RotationFromVectorsMatrix(const Vector3& n, const Vector3& v, const Vector3& u)
+	Matrix4 Matrix4::rotationFromVectorsMatrix(const Vector3& n, const Vector3& v, const Vector3& u)
 	{
-		(*this)[0][0] = u.GetX();   (*this)[1][0] = u.GetY();   (*this)[2][0] = u.GetZ();   (*this)[3][0] = 0.0f;
-		(*this)[0][1] = v.GetX();   (*this)[1][1] = v.GetY();   (*this)[2][1] = v.GetZ();   (*this)[3][1] = 0.0f;
-		(*this)[0][2] = n.GetX();   (*this)[1][2] = n.GetY();   (*this)[2][2] = n.GetZ();   (*this)[3][2] = 0.0f;
+		(*this)[0][0] = u.getX();   (*this)[1][0] = u.getY();   (*this)[2][0] = u.getZ();   (*this)[3][0] = 0.0f;
+		(*this)[0][1] = v.getX();   (*this)[1][1] = v.getY();   (*this)[2][1] = v.getZ();   (*this)[3][1] = 0.0f;
+		(*this)[0][2] = n.getX();   (*this)[1][2] = n.getY();   (*this)[2][2] = n.getZ();   (*this)[3][2] = 0.0f;
 		(*this)[0][3] = 0.0f;       (*this)[1][3] = 0.0f;       (*this)[2][3] = 0.0f;       (*this)[3][3] = 1.0f;
 
 		return *this;
 	}
 
-	Matrix4 Matrix4::RotationFromDirectionMatrix(const Vector3& forward, const Vector3& up)
+	Matrix4 Matrix4::rotationFromDirectionMatrix(const Vector3& forward, const Vector3& up)
 	{
-		Vector3 n = forward.Normalized();
-		Vector3 u = Vector3(up.Normalized()).Cross(n);
-		Vector3 v = n.Cross(u);
+		Vector3 n = forward.normalized();
+		Vector3 u = Vector3(up.normalized()).cross(n);
+		Vector3 v = n.cross(u);
 
-		return RotationFromVectorsMatrix(n, v, u);
+		return rotationFromVectorsMatrix(n, v, u);
 	}
 
-	Matrix4 Matrix4::CameraMatrix(const Vector3& forward, const Vector3& up)
+	Matrix4 Matrix4::cameraMatrix(const Vector3& forward, const Vector3& up)
 	{
 		Vector3 f = forward;
-		f = f.Normalized();
+		f = f.normalized();
 
 		Vector3 r = up;
-		r = r.Normalized();
-		r = r.Cross(f);
+		r = r.normalized();
+		r = r.cross(f);
 
-		Vector3 u = f.Cross(r);
+		Vector3 u = f.cross(r);
 
-		(*this)[0][0] = r.GetX();   (*this)[1][0] = r.GetY();   (*this)[2][0] = r.GetZ();	(*this)[3][0] = 0.0f;
-		(*this)[0][1] = u.GetX();	(*this)[1][1] = u.GetY();	(*this)[2][1] = u.GetZ();	(*this)[3][1] = 0.0f;
-		(*this)[0][2] = f.GetX();	(*this)[1][2] = f.GetY();	(*this)[2][2] = f.GetZ();	(*this)[3][2] = 0.0f;
+		(*this)[0][0] = r.getX();   (*this)[1][0] = r.getY();   (*this)[2][0] = r.getZ();	(*this)[3][0] = 0.0f;
+		(*this)[0][1] = u.getX();	(*this)[1][1] = u.getY();	(*this)[2][1] = u.getZ();	(*this)[3][1] = 0.0f;
+		(*this)[0][2] = f.getX();	(*this)[1][2] = f.getY();	(*this)[2][2] = f.getZ();	(*this)[3][2] = 0.0f;
 		(*this)[0][3] = 0.0f;		(*this)[1][3] = 0.0f;		(*this)[2][3] = 0.0f;		(*this)[3][3] = 1.0f;
 
 		return *this;
 	}
 
-	Matrix4 Matrix4::PerspectiveMatrix(float fov, float aspectRatio, float zNear, float zFar)
+	Matrix4 Matrix4::perspectiveMatrix(float fov, float aspectRatio, float zNear, float zFar)
 	{
 		const float zRange = zNear - zFar;
 		const float tanHalfFOV = tanf(fov / 2.0f);
@@ -137,7 +137,7 @@ namespace apanoo {
 		return *this;
 	}
 
-	Matrix4 Matrix4::OrthographicMatrix(float left, float right, float bottom, float top, float near, float far)
+	Matrix4 Matrix4::orthographicMatrix(float left, float right, float bottom, float top, float near, float far)
 	{
 		const float width = (right - left);
 		const float height = (top - bottom);
@@ -151,7 +151,7 @@ namespace apanoo {
 		return *this;
 	}
 
-	Matrix4 Matrix4::Transpose() const
+	Matrix4 Matrix4::transpose() const
 	{
 		Matrix4 t;
 		for (int j = 0; j < 4; j++) {
@@ -163,7 +163,7 @@ namespace apanoo {
 	}
 
 	// ÇóÄæ¾ØÕó
-	Matrix4 Matrix4::Inverse() const
+	Matrix4 Matrix4::inverse() const
 	{
 		// Çó°éËæ¾ØÕó
 		Matrix4 result;

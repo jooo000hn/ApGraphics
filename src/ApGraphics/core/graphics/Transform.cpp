@@ -19,11 +19,11 @@ namespace apanoo {
 		Matrix4 transform = getTransformation(); 
 
 		// 投影矩阵(P)
-		Matrix4 projection = Matrix4().PerspectiveMatrix(m_Fov, (float)m_Width / (float)m_Height, m_Near, m_Far);
+		Matrix4 projection = Matrix4().perspectiveMatrix(m_Fov, (float)m_Width / (float)m_Height, m_Near, m_Far);
 
 		// 摄像机矩阵(V)
-		Matrix4 cameraRotation = Matrix4().CameraMatrix(m_Camera.getForward(), m_Camera.getUp());
-		Matrix4 cameraTranslation = Matrix4().TranslationMatrix(Vector3(-m_Camera.getPosition().GetX(), -m_Camera.getPosition().GetY(), -m_Camera.getPosition().GetZ()));
+		Matrix4 cameraRotation = Matrix4().cameraMatrix(m_Camera.getForward(), m_Camera.getUp());
+		Matrix4 cameraTranslation = Matrix4().translationMatrix(Vector3(-m_Camera.getPosition().getX(), -m_Camera.getPosition().getY(), -m_Camera.getPosition().getZ()));
 		
 		return projection * (cameraRotation * (cameraTranslation * transform));
 	}
@@ -31,9 +31,9 @@ namespace apanoo {
 	// 模型变换(M)
 	Matrix4 Transform::getTransformation()
 	{
-		Matrix4 translation = Matrix4().TranslationMatrix(m_Translation);
-		Matrix4 rotation = Matrix4().RotationEulerMatrix(m_Rotation.GetX(), m_Rotation.GetY(), m_Rotation.GetZ());
-		Matrix4 scale = Matrix4().ScaleMatrix(m_Scale);
+		Matrix4 translation = Matrix4().translationMatrix(m_Translation);
+		Matrix4 rotation = Matrix4().rotationEulerMatrix(m_Rotation.getX(), m_Rotation.getY(), m_Rotation.getZ());
+		Matrix4 scale = Matrix4().scaleMatrix(m_Scale);
 		
 		return translation * (rotation * scale);
 	}

@@ -63,36 +63,36 @@ namespace apanoo {
 		}
 
 		// 单位矩阵
-		Matrix4 IdentityMatrix();
+		Matrix4 identityMatrix();
 
 		// 放缩
-		Matrix4 ScaleMatrix(const Vector3& r);
+		Matrix4 scaleMatrix(const Vector3& r);
 
 		// 平移
-		Matrix4 TranslationMatrix(const Vector3& r);
+		Matrix4 translationMatrix(const Vector3& r);
 
 		// 欧拉角旋转
-		Matrix4 RotationEulerMatrix(float rotateX, float rotateY, float rotateZ);
+		Matrix4 rotationEulerMatrix(float rotateX, float rotateY, float rotateZ);
 
-		Matrix4 RotationFromVectorsMatrix(const Vector3& n, const Vector3& v, const Vector3& u);
+		Matrix4 rotationFromVectorsMatrix(const Vector3& n, const Vector3& v, const Vector3& u);
 
 		// 按方向旋转
-		Matrix4 RotationFromDirectionMatrix(const Vector3& forward, const Vector3& up);
+		Matrix4 rotationFromDirectionMatrix(const Vector3& forward, const Vector3& up);
 
 		// Camera
-		Matrix4 CameraMatrix(const Vector3& forward, const Vector3& up);
+		Matrix4 cameraMatrix(const Vector3& forward, const Vector3& up);
 
 		// 透视
-		Matrix4 PerspectiveMatrix(float fov, float aspectRatio, float zNear, float zFar);
+		Matrix4 perspectiveMatrix(float fov, float aspectRatio, float zNear, float zFar);
 
 		// 正交
-		Matrix4 OrthographicMatrix(float left, float right, float bottom, float top, float near, float far);
+		Matrix4 orthographicMatrix(float left, float right, float bottom, float top, float near, float far);
 
 		// 转置
-		Matrix4 Transpose() const;
+		Matrix4 transpose() const;
 
 		// 求逆
-		Matrix4 Inverse() const;
+		Matrix4 inverse() const;
 
 		// 操作符
 		Vector4 operator*(const Vector4& r) const;
@@ -103,7 +103,7 @@ namespace apanoo {
 
 		friend std::ostream& operator<<(std::ostream& stream, const Matrix4& matrix);
 
-		inline void Set(unsigned int x, unsigned int y, float val) { m[x][y] = val; }
+		inline void set(unsigned int x, unsigned int y, float val) { m[x][y] = val; }
 		inline const float* operator[](int index) const { return m[index]; }
 		inline float* operator[](int index) { return m[index]; }
 	private:

@@ -2,7 +2,7 @@
 #include "Quaternion.h"
 
 namespace apanoo {
-	Vector3 Vector3::Cross(const Vector3& r) const
+	Vector3 Vector3::cross(const Vector3& r) const
 	{
 		float x = (*this)[1] * r[2] - (*this)[2] * r[1];
 		float y = (*this)[2] * r[0] - (*this)[0] * r[2];
@@ -11,7 +11,7 @@ namespace apanoo {
 		return Vector3(x, y, z);
 	}
 
-	float Vector3::Dot(const Vector3& r) const
+	float Vector3::dot(const Vector3& r) const
 	{
 		float result = 0.0f;
 		for (unsigned int i = 0; i < 3; i++)
@@ -22,7 +22,7 @@ namespace apanoo {
 		return result;
 	}
 
-	float Vector3::Max() const
+	float Vector3::max() const
 	{
 		float maxVal = (*this)[0];
 
@@ -36,17 +36,17 @@ namespace apanoo {
 		return maxVal;
 	}
 
-	float Vector3::LengthSq() const
+	float Vector3::lengthSq() const
 	{
-		return this->Dot(*this);
+		return this->dot(*this);
 	}
 
-	float Vector3::Length() const
+	float Vector3::length() const
 	{
-		return sqrt(LengthSq());
+		return sqrt(lengthSq());
 	}
 
-	Vector3 Vector3::Rotate(float angle, const Vector3& axis) const
+	Vector3 Vector3::rotate(float angle, const Vector3& axis) const
 	{
 		// const float sin = sinf(-angle);
 		// const float cos = cosf(-angle);
@@ -58,45 +58,45 @@ namespace apanoo {
 		const float sinHalfAngle = sinf(angle/2);
 		const float cosHalfAngle = cosf(angle/2);
 
-		const float Rx = axis.GetX() * sinHalfAngle;
-		const float Ry = axis.GetY() * sinHalfAngle;
-		const float Rz = axis.GetZ() * sinHalfAngle;
+		const float Rx = axis.getX() * sinHalfAngle;
+		const float Ry = axis.getY() * sinHalfAngle;
+		const float Rz = axis.getZ() * sinHalfAngle;
 		const float Rw = cosHalfAngle;
 
 		Quaternion rotationQ(Rx, Ry, Rz, Rw);
-		Quaternion conjugateQ = rotationQ.Conjugate();
+		Quaternion conjugateQ = rotationQ.conjugate();
 		Quaternion w = rotationQ * (*this) * conjugateQ;
 
-		Vector3 ret(w.GetX(), w.GetY(), w.GetZ());
+		Vector3 ret(w.getX(), w.getY(), w.getZ());
 
 		return ret;
 	}
 
-	Vector3 Vector3::Rotate(const Quaternion& rotation) const
+	Vector3 Vector3::rotate(const Quaternion& rotation) const
 	{
-		Quaternion conjugateQ = rotation.Conjugate();
+		Quaternion conjugateQ = rotation.conjugate();
 		Quaternion w = rotation * (*this) * conjugateQ;
 
-		Vector3 ret(w.GetX(), w.GetY(), w.GetZ());
+		Vector3 ret(w.getX(), w.getY(), w.getZ());
 
 		return ret;
 	}
 
-	Vector3 Vector3::Normalized() const
+	Vector3 Vector3::normalized() const
 	{
-		return *this / Length();
+		return *this / length();
 	}
 
-	Vector3 Vector3::Lerp(const Vector3& r, float lerpFactor) const
+	Vector3 Vector3::lerp(const Vector3& r, float lerpFactor) const
 	{
 		return (r - *this) * lerpFactor + *this;
 	}
 
 	// R = L - 2 (L.dot(n)n)
 	// normal 必须为单位向量
-	Vector3 Vector3::Reflect(const Vector3& normal) const
+	Vector3 Vector3::reflect(const Vector3& normal) const
 	{
-		return *this - (normal * (this->Dot(normal) * 2));
+		return *this - (normal * (this->dot(normal) * 2));
 	}
 
 	Vector3 Vector3::operator+(const Vector3& r) const
@@ -202,7 +202,7 @@ namespace apanoo {
 
 	std::ostream& operator<<(std::ostream& stream, const Vector3& vector)
 	{
-		stream << "Vector3(" << vector.GetX() << "," << vector.GetY() << "," << vector.GetZ() << ")";
+		stream << "Vector3(" << vector.getX() << "," << vector.getY() << "," << vector.getZ() << ")";
 		return stream;
 	}
 }

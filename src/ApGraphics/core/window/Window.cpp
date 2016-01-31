@@ -81,13 +81,6 @@ namespace apanoo {
 		glCullFace(GL_BACK);
 		glEnable(GL_CULL_FACE);
 
-		// When GL_FRAMEBUFFER_SRGB is enabled, all writes 
-		// to an image with an sRGB image format will assume
-		// that the input colors (the colors being written) 
-		// are in a linear colorspace. Therefore, it will 
-		// convert them to the sRGB colorspace.
-		glEnable(GL_FRAMEBUFFER_SRGB);
-
 		std::cout << "OpenGL " << glGetString(GL_VERSION) << std::endl;
 		Log::Instance()->OutputMisc("OpenGL %s", glGetString(GL_VERSION));
 		return true;

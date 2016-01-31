@@ -79,6 +79,8 @@ namespace apanoo {
 				}
 			}
 		}
+	public:
+		inline Window* getWindow() const { return m_Window; }
 
 	private:
 		Window* m_Window;

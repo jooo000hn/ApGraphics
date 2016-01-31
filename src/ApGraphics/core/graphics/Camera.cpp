@@ -6,8 +6,8 @@ namespace apanoo {
 	Camera::Camera(Vector3& pos, Vector3& forward, Vector3& up)
 		: m_Position(pos), m_Forward(forward), m_Up(up)
 	{
-		m_Up = m_Up.Normalized();
-		m_Forward = m_Forward.Normalized();
+		m_Up = m_Up.normalized();
+		m_Forward = m_Forward.normalized();
 	}
 
 	Camera::Camera()
@@ -32,31 +32,31 @@ namespace apanoo {
 
 	Vector3 Camera::getLeft()
 	{
-		Vector3 left = m_Forward.Cross(m_Up);
-		return left.Normalized();
+		Vector3 left = m_Forward.cross(m_Up);
+		return left.normalized();
 	}
 
 	Vector3 Camera::getRight()
 	{
-		Vector3 right = m_Up.Cross(m_Forward);
-		return right.Normalized();
+		Vector3 right = m_Up.cross(m_Forward);
+		return right.normalized();
 	}
 
 	void Camera::rotateX(float angle)
 	{
-		Vector3 Haxis = yAxis.Cross(m_Forward).Normalized();
+		Vector3 Haxis = yAxis.cross(m_Forward).normalized();
 		
-		m_Forward = m_Forward.Rotate(angle, Haxis).Normalized();
+		m_Forward = m_Forward.rotate(angle, Haxis).normalized();
 
-		m_Up = m_Forward.Cross(Haxis).Normalized();
+		m_Up = m_Forward.cross(Haxis).normalized();
 	}
 
 	void Camera::rotateY(float angle)
 	{
-		Vector3 Haxis = yAxis.Cross(m_Forward).Normalized();
+		Vector3 Haxis = yAxis.cross(m_Forward).normalized();
 
-		m_Forward = m_Forward.Rotate(angle, yAxis).Normalized();
+		m_Forward = m_Forward.rotate(angle, yAxis).normalized();
 
-		m_Up = m_Forward.Cross(Haxis).Normalized();
+		m_Up = m_Forward.cross(Haxis).normalized();
 	}
 }

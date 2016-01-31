@@ -46,7 +46,7 @@ namespace apanoo {
 		}
 
 		// ∂¡»°shader
-		std::string SourceString = FileUtils::ReadShader(filename);
+		std::string SourceString = FileUtils::readShader(filename);
 		const char* source = SourceString.c_str();
 
 		glShaderSource(shader, 1, &source, NULL);
@@ -116,17 +116,17 @@ namespace apanoo {
 
 	void Shader::setUniform2f(const GLchar* name, const Vector2& vector)
 	{
-		glUniform2f(getUniformLocation(name), vector.GetX(), vector.GetY());
+		glUniform2f(getUniformLocation(name), vector.getX(), vector.getY());
 	}
 
 	void Shader::setUniform3f(const GLchar* name, const Vector3& vector)
 	{
-		glUniform3f(getUniformLocation(name), vector.GetX(), vector.GetY(), vector.GetZ());
+		glUniform3f(getUniformLocation(name), vector.getX(), vector.getY(), vector.getZ());
 	}
 
 	void Shader::setUniform4f(const GLchar* name, const Vector4& vector)
 	{
-		glUniform4f(getUniformLocation(name), vector.GetX(), vector.GetY(), vector.GetZ(), vector.GetW());
+		glUniform4f(getUniformLocation(name), vector.getX(), vector.getY(), vector.getZ(), vector.getW());
 	}
 
 	/*

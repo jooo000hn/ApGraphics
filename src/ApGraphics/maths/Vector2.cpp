@@ -1,12 +1,12 @@
 #include "Vector2.h"
 
 namespace apanoo {
-	float Vector2::Cross(const Vector2& r) const
+	float Vector2::cross(const Vector2& r) const
 	{
-		return GetX() * r.GetY() - GetY() * r.GetX();
+		return getX() * r.getY() - getY() * r.getX();
 	}
 
-	float Vector2::Dot(const Vector2& r) const
+	float Vector2::dot(const Vector2& r) const
 	{
 		float result = 0.0f;
 		for (unsigned int i = 0; i < 2; i++)
@@ -17,7 +17,7 @@ namespace apanoo {
 		return result;
 	}
 
-	float Vector2::Max() const
+	float Vector2::max() const
 	{
 		float maxVal = (*this)[0];
 
@@ -31,31 +31,31 @@ namespace apanoo {
 		return maxVal;
 	}
 
-	float Vector2::LengthSq() const
+	float Vector2::lengthSq() const
 	{
-		return this->Dot(*this);
+		return this->dot(*this);
 	}
 
-	float Vector2::Length() const
+	float Vector2::length() const
 	{
-		return sqrt(LengthSq());
+		return sqrt(lengthSq());
 	}
 
-	Vector2 Vector2::Normalized() const
+	Vector2 Vector2::normalized() const
 	{
-		return *this / Length();
+		return *this / length();
 	}
 
-	Vector2 Vector2::Lerp(const Vector2& r, float lerpFactor) const
+	Vector2 Vector2::lerp(const Vector2& r, float lerpFactor) const
 	{
 		return (r - *this) * lerpFactor + *this;
 	}
 
 	// R = L - 2 (L.dot(n)n)
 	// normal 必须为单位向量
-	Vector2 Vector2::Reflect(const Vector2& normal) const
+	Vector2 Vector2::reflect(const Vector2& normal) const
 	{
-		return *this - (normal * (this->Dot(normal) * 2));
+		return *this - (normal * (this->dot(normal) * 2));
 	}
 
 	Vector2 Vector2::operator+(const Vector2& r) const
@@ -114,7 +114,7 @@ namespace apanoo {
 
 	std::ostream& operator<<(std::ostream& stream, const Vector2& vector)
 	{
-		stream << "Vector2(" << vector.GetX() << "," << vector.GetY() << ")";
+		stream << "Vector2(" << vector.getX() << "," << vector.getY() << ")";
 		return stream;
 	}
 

@@ -33,34 +33,34 @@ namespace apanoo {
 		Quaternion(const Matrix4& m);
 
 		// 线性插值
-		Quaternion NLerp(const Quaternion& r, float lerpFactor, bool shortestPath) const;
+		Quaternion nLerp(const Quaternion& r, float lerpFactor, bool shortestPath) const;
 
 		// 球面线性插值
-		Quaternion SLerp(const Quaternion& r, float lerpFactor, bool shortestPath) const;
+		Quaternion sLerp(const Quaternion& r, float lerpFactor, bool shortestPath) const;
 
 		// 四元数转四维矩阵
-		Matrix4 ToRotationMatrix() const;
+		Matrix4 toRotationMatrix() const;
 
 		// 求正前方向向量
-		Vector3 GetForward() const;
+		Vector3 getForward() const;
 
 		// 求正后方向向量
-		Vector3 GetBack() const;
+		Vector3 getBack() const;
 
 		// 求正上方向向量
-		Vector3 GetUp() const;
+		Vector3 getUp() const;
 
 		// 求正下方向向量
-		Vector3 GetDown() const;
+		Vector3 getDown() const;
 
 		// 求正右方向向量
-		Vector3 GetRight() const;
+		Vector3 getRight() const;
 
 		// 求正左方向向量
-		Vector3 GetLeft() const;
+		Vector3 getLeft() const;
 
 		// 求共轭
-		Quaternion Conjugate() const;
+		Quaternion conjugate() const;
 
 		Quaternion operator*(const Quaternion& r) const;
 

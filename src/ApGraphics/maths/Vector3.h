@@ -29,43 +29,43 @@ namespace apanoo {
 			(*this)[2] = z;
 		}
 
-		inline float GetX() const { return (*this)[0]; }
-		inline float GetY() const { return (*this)[1]; }
-		inline float GetZ() const { return (*this)[2]; }
-		inline void SetX(const float& x) { (*this)[0] = x; }
-		inline void SetY(const float& y) { (*this)[1] = y; }
-		inline void SetZ(const float& z) { (*this)[2] = z; }
-		inline void Set(const float& x, const float& y, const float& z) { SetX(x); SetY(y); SetZ(z); }
+		inline float getX() const { return (*this)[0]; }
+		inline float getY() const { return (*this)[1]; }
+		inline float getZ() const { return (*this)[2]; }
+		inline void setX(const float& x) { (*this)[0] = x; }
+		inline void setY(const float& y) { (*this)[1] = y; }
+		inline void setZ(const float& z) { (*this)[2] = z; }
+		inline void set(const float& x, const float& y, const float& z) { setX(x); setY(y); setZ(z); }
 
 		// 叉积
-		Vector3 Cross(const Vector3& r) const;
+		Vector3 cross(const Vector3& r) const;
 
 		// 点积
-		float Dot(const Vector3& r) const;
+		float dot(const Vector3& r) const;
 
 		// 最大分量
-		float Max() const;
+		float max() const;
 
 		// 长度的平方
-		float LengthSq() const;
+		float lengthSq() const;
 
 		// 长度
-		float Length() const;
+		float length() const;
 
 		// 旋转（通过旋转轴与旋转角）
-		Vector3 Rotate(float angle, const Vector3& axis) const;
+		Vector3 rotate(float angle, const Vector3& axis) const;
 
 		// 旋转（通过四元数）
-		Vector3 Rotate(const Quaternion& rotation) const;
+		Vector3 rotate(const Quaternion& rotation) const;
 
 		// 单位化
-		Vector3 Normalized() const;
+		Vector3 normalized() const;
 
 		// 线性插值，this与r之间的线性插值，lerpFactor范围：[0, 1]
-		Vector3 Lerp(const Vector3& r, float lerpFactor) const;
+		Vector3 lerp(const Vector3& r, float lerpFactor) const;
 
 		// 镜面反射，normal为法线
-		Vector3 Reflect(const Vector3& normal) const;
+		Vector3 reflect(const Vector3& normal) const;
 
 		Vector3 operator+(const Vector3& r) const;
 		Vector3 operator-(const Vector3& r) const;

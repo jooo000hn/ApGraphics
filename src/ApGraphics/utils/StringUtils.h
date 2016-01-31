@@ -5,7 +5,7 @@
 #include <vector>
 
 // ×Ö·û´®·Ö¸î£¬·Ö¸ô·ûÎª delimeter
-static std::vector<std::string> split_string(const std::string& s, char delimeter) {
+static std::vector<std::string> splitString(const std::string& s, char delimeter) {
 	std::vector<std::string> elems;
 	std::stringstream ss(s);
 	std::string item;

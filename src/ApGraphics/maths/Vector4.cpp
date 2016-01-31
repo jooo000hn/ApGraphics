@@ -1,7 +1,8 @@
 #include "Vector4.h"
 
 namespace apanoo {
-	float Vector4::Dot(const Vector4& r) const
+
+	float Vector4::dot(const Vector4& r) const
 	{
 		float result = 0.0f;
 		for (unsigned int i = 0; i < 4; i++)
@@ -12,7 +13,7 @@ namespace apanoo {
 		return result;
 	}
 
-	float Vector4::Max() const
+	float Vector4::max() const
 	{
 		float maxVal = (*this)[0];
 
@@ -26,31 +27,31 @@ namespace apanoo {
 		return maxVal;
 	}
 
-	float Vector4::LengthSq() const
+	float Vector4::lengthSq() const
 	{
-		return this->Dot(*this);
+		return this->dot(*this);
 	}
 
-	float Vector4::Length() const
+	float Vector4::length() const
 	{
-		return sqrt(LengthSq());
+		return sqrt(lengthSq());
 	}
 
-	Vector4 Vector4::Normalized() const
+	Vector4 Vector4::normalized() const
 	{
-		return *this / Length();
+		return *this / length();
 	}
 
-	Vector4 Vector4::Lerp(const Vector4& r, float lerpFactor) const
+	Vector4 Vector4::lerp(const Vector4& r, float lerpFactor) const
 	{
 		return (r - *this) * lerpFactor + *this;
 	}
 
 	// R = L - 2 (L.dot(n)n)
 	// normal 必须为单位向量
-	Vector4 Vector4::Reflect(const Vector4& normal) const
+	Vector4 Vector4::reflect(const Vector4& normal) const
 	{
-		return *this - (normal * (this->Dot(normal) * 2));
+		return *this - (normal * (this->dot(normal) * 2));
 	}
 
 	Vector4 Vector4::operator+(const Vector4& r) const
@@ -156,7 +157,7 @@ namespace apanoo {
 
 	std::ostream& operator<<(std::ostream& stream, const Vector4& vector)
 	{
-		stream << "Vector4(" << vector.GetX() << "," << vector.GetY() << "," << vector.GetZ() << "," << vector.GetW() << ")";
+		stream << "Vector4(" << vector.getX() << "," << vector.getY() << "," << vector.getZ() << "," << vector.getW() << ")";
 		return stream;
 	}
 }

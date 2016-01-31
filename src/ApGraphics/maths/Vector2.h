@@ -25,35 +25,35 @@ namespace apanoo {
 			(*this)[1] = y;
 		}
 
-		inline float GetX() const { return (*this)[0]; }
-		inline float GetY() const { return (*this)[1]; }
-		inline void SetX(const float& x) { (*this)[0] = x; }
-		inline void SetY(const float& y) { (*this)[1] = y; }
-		inline void Set(const float& x, const float& y) { SetX(x); SetY(y); }
+		inline float getX() const { return (*this)[0]; }
+		inline float getY() const { return (*this)[1]; }
+		inline void setX(const float& x) { (*this)[0] = x; }
+		inline void setY(const float& y) { (*this)[1] = y; }
+		inline void set(const float& x, const float& y) { setX(x); setY(y); }
 
 		// 叉积
-		float Cross(const Vector2& r) const;
+		float cross(const Vector2& r) const;
 
 		// 点积
-		float Dot(const Vector2& r) const;
+		float dot(const Vector2& r) const;
 
 		// 最大分量
-		float Max() const;
+		float max() const;
 
 		// 长度的平方
-		float LengthSq() const;
+		float lengthSq() const;
 
 		// 长度
-		float Length() const;
+		float length() const;
 
 		// 单位化
-		Vector2 Normalized() const;
+		Vector2 normalized() const;
 
 		// 线性插值，this与r之间的线性插值，lerpFactor范围：[0, 1]
-		Vector2 Lerp(const Vector2& r, float lerpFactor) const;
+		Vector2 lerp(const Vector2& r, float lerpFactor) const;
 
 		// 镜面反射，normal为法线
-		Vector2 Reflect(const Vector2& normal) const;
+		Vector2 reflect(const Vector2& normal) const;
 
 		Vector2 operator+(const Vector2& r) const;
 		Vector2 operator-(const Vector2& r) const;

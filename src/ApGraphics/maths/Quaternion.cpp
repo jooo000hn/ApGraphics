@@ -41,7 +41,7 @@ namespace apanoo {
 		}
 
 		// µ¥Î»»¯
-		float length = Length();
+		float length = this->length();
 		(*this)[3] = (*this)[3] / length;
 		(*this)[0] = (*this)[0] / length;
 		(*this)[1] = (*this)[1] / length;
@@ -53,9 +53,9 @@ namespace apanoo {
 		float sinHalfAngle = sinf(angle / 2);
 		float cosHalfAngle = cosf(angle / 2);
 
-		(*this)[0] = axis.GetX() * sinHalfAngle;
-		(*this)[1] = axis.GetY() * sinHalfAngle;
-		(*this)[2] = axis.GetZ() * sinHalfAngle;
+		(*this)[0] = axis.getX() * sinHalfAngle;
+		(*this)[1] = axis.getY() * sinHalfAngle;
+		(*this)[2] = axis.getZ() * sinHalfAngle;
 		(*this)[3] = cosHalfAngle;
 	}
 
@@ -67,11 +67,11 @@ namespace apanoo {
 		(*this)[3] = r[3];
 	}
 
-	Quaternion Quaternion::NLerp(const Quaternion& r, float lerpFactor, bool shortestPath) const
+	Quaternion Quaternion::nLerp(const Quaternion& r, float lerpFactor, bool shortestPath) const
 	{
 		Quaternion correctedDest;
 
-		if (shortestPath && this->Dot(r) < 0)
+		if (shortestPath && this->dot(r) < 0)
 		{
 			correctedDest = r * -1;
 		}
@@ -80,14 +80,14 @@ namespace apanoo {
 			correctedDest = r;
 		}
 
-		return Quaternion(Lerp(correctedDest, lerpFactor).Normalized());
+		return Quaternion(lerp(correctedDest, lerpFactor).normalized());
 	}
 
-	Quaternion Quaternion::SLerp(const Quaternion& r, float lerpFactor, bool shortestPath) const
+	Quaternion Quaternion::sLerp(const Quaternion& r, float lerpFactor, bool shortestPath) const
 	{
 		static const float EPSILON = 1e3;
 
-		float cos = this->Dot(r);
+		float cos = this->dot(r);
 		Quaternion correctedDest;
 
 		if (shortestPath && cos < 0)
@@ -102,7 +102,7 @@ namespace apanoo {
 
 		if (fabs(cos) >(1 - EPSILON))
 		{
-			return NLerp(correctedDest, lerpFactor, false);
+			return nLerp(correctedDest, lerpFactor, false);
 		}
 
 		float sin = (float)sqrtf(1.0f - cos * cos);
@@ -115,73 +115,73 @@ namespace apanoo {
 		return Quaternion((*this) * srcFactor + correctedDest * destFactor);
 	}
 
-	Matrix4 Quaternion::ToRotationMatrix() const
+	Matrix4 Quaternion::toRotationMatrix() const
 	{
-		Vector3 forward = Vector3(2.0f * (GetX() * GetZ() - GetW() * GetY()), 2.0f * (GetY() * GetZ() + GetW() * GetX()), 1.0f - 2.0f * (GetX() * GetX() + GetY() * GetY()));
-		Vector3 up = Vector3(2.0f * (GetX()*GetY() + GetW()*GetZ()), 1.0f - 2.0f * (GetX()*GetX() + GetZ()*GetZ()), 2.0f * (GetY()*GetZ() - GetW()*GetX()));
-		Vector3 right = Vector3(1.0f - 2.0f * (GetY()*GetY() + GetZ()*GetZ()), 2.0f * (GetX()*GetY() - GetW()*GetZ()), 2.0f * (GetX()*GetZ() + GetW()*GetY()));
+		Vector3 forward = Vector3(2.0f * (getX() * getZ() - getW() * getY()), 2.0f * (getY() * getZ() + getW() * getX()), 1.0f - 2.0f * (getX() * getX() + getY() * getY()));
+		Vector3 up = Vector3(2.0f * (getX()*getY() + getW()*getZ()), 1.0f - 2.0f * (getX()*getX() + getZ()*getZ()), 2.0f * (getY()*getZ() - getW()*getX()));
+		Vector3 right = Vector3(1.0f - 2.0f * (getY()*getY() + getZ()*getZ()), 2.0f * (getX()*getY() - getW()*getZ()), 2.0f * (getX()*getZ() + getW()*getY()));
 
-		return Matrix4().RotationFromVectorsMatrix(forward, up, right);
+		return Matrix4().rotationFromVectorsMatrix(forward, up, right);
 	}
 
-	Vector3 Quaternion::GetForward() const
+	Vector3 Quaternion::getForward() const
 	{
-		return Vector3(0, 0, 1).Rotate(*this);
+		return Vector3(0, 0, 1).rotate(*this);
 	}
 
-	Vector3 Quaternion::GetBack() const
+	Vector3 Quaternion::getBack() const
 	{
-		return Vector3(0, 0, -1).Rotate(*this);
+		return Vector3(0, 0, -1).rotate(*this);
 	}
 
-	Vector3 Quaternion::GetUp() const
+	Vector3 Quaternion::getUp() const
 	{
-		return Vector3(0, 1, 0).Rotate(*this);
+		return Vector3(0, 1, 0).rotate(*this);
 	}
 
-	Vector3 Quaternion::GetDown() const
+	Vector3 Quaternion::getDown() const
 	{
-		return Vector3(0, -1, 0).Rotate(*this);
+		return Vector3(0, -1, 0).rotate(*this);
 	}
 
-	Vector3 Quaternion::GetRight() const
+	Vector3 Quaternion::getRight() const
 	{
-		return Vector3(1, 0, 0).Rotate(*this);
+		return Vector3(1, 0, 0).rotate(*this);
 	}
 
-	Vector3 Quaternion::GetLeft() const
+	Vector3 Quaternion::getLeft() const
 	{
-		return Vector3(-1, 0, 0).Rotate(*this);
+		return Vector3(-1, 0, 0).rotate(*this);
 	}
 
-	Quaternion Quaternion::Conjugate() const
+	Quaternion Quaternion::conjugate() const
 	{
-		return Quaternion(-GetX(), -GetY(), -GetZ(), GetW());
+		return Quaternion(-getX(), -getY(), -getZ(), getW());
 	}
 
 	Quaternion Quaternion::operator*(const Vector3& v) const
 	{
-		const float _w = -(GetX() * v.GetX()) - (GetY() * v.GetY()) - (GetZ() * v.GetZ());
-		const float _x = (GetW() * v.GetX()) + (GetY() * v.GetZ()) - (GetZ() * v.GetY());
-		const float _y = (GetW() * v.GetY()) + (GetZ() * v.GetX()) - (GetX() * v.GetZ());
-		const float _z = (GetW() * v.GetZ()) + (GetX() * v.GetY()) - (GetY() * v.GetX());
+		const float _w = -(getX() * v.getX()) - (getY() * v.getY()) - (getZ() * v.getZ());
+		const float _x = (getW() * v.getX()) + (getY() * v.getZ()) - (getZ() * v.getY());
+		const float _y = (getW() * v.getY()) + (getZ() * v.getX()) - (getX() * v.getZ());
+		const float _z = (getW() * v.getZ()) + (getX() * v.getY()) - (getY() * v.getX());
 
 		return Quaternion(_x, _y, _z, _w);
 	}
 
 	Quaternion Quaternion::operator*(const Quaternion& r) const
 	{
-		const float _w = (GetW() * r.GetW()) - (GetX() * r.GetX()) - (GetY() * r.GetY()) - (GetZ() * r.GetZ());
-		const float _x = (GetX() * r.GetW()) + (GetW() * r.GetX()) + (GetY() * r.GetZ()) - (GetZ() * r.GetY());
-		const float _y = (GetY() * r.GetW()) + (GetW() * r.GetY()) + (GetZ() * r.GetX()) - (GetX() * r.GetZ());
-		const float _z = (GetZ() * r.GetW()) + (GetW() * r.GetZ()) + (GetX() * r.GetY()) - (GetY() * r.GetX());
+		const float _w = (getW() * r.getW()) - (getX() * r.getX()) - (getY() * r.getY()) - (getZ() * r.getZ());
+		const float _x = (getX() * r.getW()) + (getW() * r.getX()) + (getY() * r.getZ()) - (getZ() * r.getY());
+		const float _y = (getY() * r.getW()) + (getW() * r.getY()) + (getZ() * r.getX()) - (getX() * r.getZ());
+		const float _z = (getZ() * r.getW()) + (getW() * r.getZ()) + (getX() * r.getY()) - (getY() * r.getX());
 
 		return Quaternion(_x, _y, _z, _w);
 	}
 
 	std::ostream& operator<<(std::ostream& stream, const Quaternion& quaternion)
 	{
-		stream << "Quaternion(" << quaternion.GetX() << "," << quaternion.GetY() << "," << quaternion.GetZ() << "," << quaternion.GetW() << ")";
+		stream << "Quaternion(" << quaternion.getX() << "," << quaternion.getY() << "," << quaternion.getZ() << "," << quaternion.getW() << ")";
 		return stream;
 	}
 }

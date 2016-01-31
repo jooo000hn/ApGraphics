@@ -9,6 +9,9 @@
 // obj文件加载
 #include "graphics/model/OBJMesh.h"
 
+// assimp model
+#include "graphics/model/ASMesh.h"
+
 // 变换：模型，视图等
 #include "graphics/Transform.h"
 

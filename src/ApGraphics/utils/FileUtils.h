@@ -1,15 +1,23 @@
 #ifndef __FILEUTILS_H__
 #define __FILEUTILS_H__
 
-#include <iostream>
-#include <fstream>
+#ifndef _IOSTREAM_
+	#include <iostream>
+#endif // !_IOSTREAM_
+
+#ifndef _FSTREAM_
+	#include <fstream>
+#endif // !_FSTREAM_
+
+#include "freeimage.h"
+#include "../log/Log.h"
 
 namespace apanoo {
 	// 读取shader文件
 	class FileUtils
 	{
 	public:
-		static std::string ReadShader(const char* filename)
+		static std::string readShader(const char* filename)
 		{
 			FILE * file = fopen(filename, "rt");
 			fseek(file, 0, SEEK_END);
@@ -27,6 +35,62 @@ namespace apanoo {
 			delete[] data;
 			return result;
 		}
+
+		static BYTE* readImage(const char* filename, GLsizei* width, GLsizei* height, int* bits)
+		{
+			// 图片格式
+			FREE_IMAGE_FORMAT fif = FIF_UNKNOWN;
+
+			// 指向图片的指针
+			FIBITMAP *dib = nullptr;
+
+			// 检查图片格式
+			fif = FreeImage_GetFileType(filename, 0);
+
+			// 若格式位置，尝试在扩展格式中猜测
+			if (fif == FIF_UNKNOWN)
+			{
+				fif = FreeImage_GetFIFFromFilename(filename);
+			}
+
+			// 如果仍然未知格式，返回空
+			if (fif == FIF_UNKNOWN)
+			{
+				std::cout << "error read image!unknow image type : " << filename << std::endl;
+				Log::Instance()->OutputSuccess("error read image!unknow image type : %s", filename);
+				return nullptr;
+			}
+
+			// 检测是否支持加载此格式
+			if (FreeImage_FIFSupportsReading(fif))
+			{
+				dib = FreeImage_Load(fif, filename);
+			}
+
+			// 不能加载则返回空
+			if (!dib)
+			{
+				std::cout << "error read image!unsupport image type : " << filename << std::endl;
+				Log::Instance()->OutputSuccess("error read image!unsupport image type : %s", filename);
+				return nullptr;
+			}
+
+			// 获取数据
+			BYTE* pixels = FreeImage_GetBits(dib);
+
+			// 获取图片宽高
+			*width = FreeImage_GetWidth(dib);
+			*height = FreeImage_GetHeight(dib);
+
+			// 获取图片位数
+			*bits = FreeImage_GetBPP(dib);
+
+			int size = (*width) * (*height) * (*bits / 8);
+			BYTE* result = new BYTE[size];
+			memcpy(result, pixels, size); // copy 资源
+			FreeImage_Unload(dib);		  // 释放资源
+			return result;
+		}
 	};
 }
-#endif // 
+#endif // ! __FILEUTILS_H__

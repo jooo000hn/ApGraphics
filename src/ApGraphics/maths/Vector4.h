@@ -30,42 +30,42 @@ namespace apanoo {
 		}
 
 		// set and get
-		inline float GetX() const { return (*this)[0]; }
-		inline float GetY() const { return (*this)[1]; }
-		inline float GetZ() const { return (*this)[2]; }
-		inline float GetW() const { return (*this)[3]; }
-		inline void SetX(const float& x) { (*this)[0] = x; }
-		inline void SetY(const float& y) { (*this)[1] = y; }
-		inline void SetZ(const float& z) { (*this)[2] = z; }
-		inline void SetW(const float& w) { (*this)[3] = w; }
-		inline void Set(const float& x, const float& y, const float& z, const float& w)
+		inline float getX() const { return (*this)[0]; }
+		inline float getY() const { return (*this)[1]; }
+		inline float getZ() const { return (*this)[2]; }
+		inline float getW() const { return (*this)[3]; }
+		inline void setX(const float& x) { (*this)[0] = x; }
+		inline void setY(const float& y) { (*this)[1] = y; }
+		inline void setZ(const float& z) { (*this)[2] = z; }
+		inline void setW(const float& w) { (*this)[3] = w; }
+		inline void set(const float& x, const float& y, const float& z, const float& w)
 		{
-			SetX(x);
-			SetY(y);
-			SetZ(z);
-			SetW(w);
+			setX(x);
+			setY(y);
+			setZ(z);
+			setW(w);
 		}
 
 		// 点积
-		float Dot(const Vector4& r) const;
+		float dot(const Vector4& r) const;
 
 		// 最大分量
-		float Max() const;
+		float max() const;
 
 		// 长度的平方
-		float LengthSq() const;
+		float lengthSq() const;
 
 		// 长度
-		float Length() const;
+		float length() const;
 
 		// 单位化
-		Vector4 Normalized() const;
+		Vector4 normalized() const;
 
 		// 线性插值，this与r之间的线性插值，lerpFactor范围：[0, 1]
-		Vector4 Lerp(const Vector4& r, float lerpFactor) const;
+		Vector4 lerp(const Vector4& r, float lerpFactor) const;
 
 		// 镜面反射，normal为法线
-		Vector4 Reflect(const Vector4& normal) const;
+		Vector4 reflect(const Vector4& normal) const;
 
 		Vector4 operator+(const Vector4& r) const;
 		Vector4 operator-(const Vector4& r) const;

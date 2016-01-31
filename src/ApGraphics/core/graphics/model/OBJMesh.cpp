@@ -11,7 +11,7 @@ namespace apanoo {
 	OBJMesh::OBJMesh(const char* filename)
 		: Mesh()
 	{
-		if ("obj" == split_string(filename, '.').back())
+		if ("obj" == splitString(filename, '.').back())
 		{
 			loadOBJ(filename);
 		}

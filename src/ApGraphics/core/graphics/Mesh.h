@@ -8,7 +8,7 @@ namespace apanoo {
 		Mesh();
 		~Mesh();
 		void addVertices(Vertex* vertices, GLsizei vcount, int* indices, GLsizei icount);
-		void draw();
+		void render();
 	private:
 		GLuint m_Vbo; // vertex buffer object
 		GLuint m_Ibo; // index buffe object
