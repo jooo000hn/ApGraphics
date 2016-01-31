@@ -1,6 +1,7 @@
 #pragma once
 #include "gl/glew.h"
 #include "../../maths/maths.h"
+#include "Material.h"
 
 namespace apanoo {
 	class Shader
@@ -21,6 +22,11 @@ namespace apanoo {
 		// add fragment shader
 		void addFragmentShader(const char* filename);
 
+		void compileShader();
+
+		// ¸üÐÂ
+		virtual void updateUniforms(Matrix4 worldMatrix, Matrix4 projectedMatrix) {}
+
 		// set uniform
 		void setUniform1f(const GLchar* name, float value);
 		void setUniform1fv(const GLchar* name, int count, float* value);
@@ -33,7 +39,6 @@ namespace apanoo {
 
 	private:
 		void addProgram(const char* filename, int type);
-		void compileShader();
 		GLuint getUniformLocation(const GLchar* name);
 	private:
 		GLuint m_Program;

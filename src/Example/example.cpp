@@ -12,13 +12,15 @@ public:
 		shader = nullptr;
 		trans = nullptr;
 		texture = nullptr;
+		m_BtnClicked = false;
+		m_RoundCamera = false;
 	}
 
 	~Game()
 	{
 		delete obj;
 		//delete testMesh;
-		delete shader;
+		//delete shader;
 		delete trans;
 		delete texture;
 	}
@@ -26,9 +28,8 @@ public:
 	void init() override
 	{
 		createWindow("ApGraphics", 960, 540);
-		shader = new Shader();
-		shader->addVertexShader("../media/shaders/basic.vert");
-		shader->addFragmentShader("../media/shaders/basic.frag");
+
+		shader = new BasicShader();
 		shader->enable();
 
 		trans = new Transform();
@@ -43,6 +44,7 @@ public:
 		//trans->setRotation(0, 0, 90);
 
 		obj = new OBJMesh("../media/models/box.obj");
+		//asmesh = new ASMesh();
 		/*testMesh = new Mesh();
 		Vertex vert[] = {
 			Vertex(0.0, 0.0, 0.0, 0.0, 0.0),
@@ -55,12 +57,6 @@ public:
 			2, 3, 0
 		};
 		testMesh->addVertices(vert, 4, inde, 6);*/
-
-		// 隐藏光标
-		getWindow()->setCursorVisible(false);
-
-		// 光标居中
-		getWindow()->setCenterCursor();
 	}
 
 	void render() override
@@ -68,10 +64,28 @@ public:
 		
 		tme += 0.01f;
 		trans->setRotation(0, tme, 0);
-		shader->setUniformMat4("transform", trans->getProjectionTransformation());
+		shader->updateUniforms(trans->getTransformation(), trans->getProjectionTransformation());
 		texture->bind(GL_TEXTURE0);
 		obj->render();
 		//testMesh->render();
+
+		if (!m_BtnClicked && getWindow()->isMouseButtonClicked(GLFW_MOUSE_BUTTON_LEFT))
+		{
+			m_BtnClicked = true;
+			// 隐藏光标
+			getWindow()->setCursorVisible(false);
+
+			// 光标居中
+			getWindow()->setCenterCursor();
+			m_RoundCamera = true;
+		}
+		if (getWindow()->isKeyTyped(GLFW_KEY_ESCAPE))
+		{
+			m_RoundCamera = false;
+			// 显示光标
+			getWindow()->setCursorVisible(true);
+			m_BtnClicked = false;
+		}
 	}
 
 	void tick() override
@@ -81,7 +95,10 @@ public:
 	
 	void update() override
 	{
-		trans->getCamera()->update(getWindow(), 0.002f, 0.08f);
+		if (m_RoundCamera)
+		{
+			trans->getCamera()->update(getWindow(), 0.002f, 0.08f);
+		}
 	}
 private:
 	OBJMesh* obj;
@@ -90,6 +107,11 @@ private:
 	Shader* shader;
 	Transform* trans;
 	Texture* texture;
+	ASMesh* asmesh;
+
+	bool m_BtnClicked;
+	bool m_RoundCamera;
+
 };
 
 int main() 

@@ -15,6 +15,8 @@ namespace apanoo {
 			m_Pos.setX(_x);
 			m_Pos.setY(_y);
 			m_Pos.setZ(_z);
+			m_TexCoord.setX(0);
+			m_TexCoord.setY(0);
 		}
 		Vertex(float _x, float _y, float _z, float _s, float _t)
 		{

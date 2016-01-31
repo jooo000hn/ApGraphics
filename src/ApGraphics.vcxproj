@@ -160,7 +160,9 @@
   <ItemGroup>
     <ClInclude Include="ApGraphics\apgraphics.h" />
     <ClInclude Include="ApGraphics\core\core.h" />
+    <ClInclude Include="ApGraphics\core\graphics\BasicShader.h" />
     <ClInclude Include="ApGraphics\core\graphics\Camera.h" />
+    <ClInclude Include="ApGraphics\core\graphics\Material.h" />
     <ClInclude Include="ApGraphics\core\graphics\Mesh.h" />
     <ClInclude Include="ApGraphics\core\graphics\model\ASMesh.h" />
     <ClInclude Include="ApGraphics\core\graphics\model\OBJMesh.h" />
@@ -181,7 +183,9 @@
     <ClInclude Include="ApGraphics\utils\timer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ApGraphics\core\graphics\BasicShader.cpp" />
     <ClCompile Include="ApGraphics\core\graphics\Camera.cpp" />
+    <ClCompile Include="ApGraphics\core\graphics\Material.cpp" />
     <ClCompile Include="ApGraphics\core\graphics\Mesh.cpp" />
     <ClCompile Include="ApGraphics\core\graphics\model\ASMesh.cpp" />
     <ClCompile Include="ApGraphics\core\graphics\model\OBJMesh.cpp" />

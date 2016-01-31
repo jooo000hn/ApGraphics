@@ -20,3 +20,6 @@
 
 // shader
 #include "graphics/Shader.h"
+#include "graphics/BasicShader.h"
+
+#include "graphics/Material.h"
