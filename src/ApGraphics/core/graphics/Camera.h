@@ -2,6 +2,8 @@
 #include "../../maths/maths.h"
 
 namespace apanoo {
+
+	class Window;
 	class Camera
 	{
 	public:
@@ -12,7 +14,7 @@ namespace apanoo {
 		// camera“∆∂Ø
 		void move(Vector3& dir, const float& amt);
 
-		void input();
+		void update(Window* window, float RotationSensitivity, float MoveSensitivity);
 
 		Vector3 getLeft();
 		Vector3 getRight();

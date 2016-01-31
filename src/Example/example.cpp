@@ -10,12 +10,14 @@ public:
 		tme = 0;
 		obj = nullptr;
 		shader = nullptr;
+		trans = nullptr;
+		texture = nullptr;
 	}
 
 	~Game()
 	{
 		delete obj;
-		delete testMesh;
+		//delete testMesh;
 		delete shader;
 		delete trans;
 		delete texture;
@@ -29,10 +31,9 @@ public:
 		shader->addFragmentShader("../media/shaders/basic.frag");
 		shader->enable();
 
-		Camera camera;
 		trans = new Transform();
 		trans->setProjection(70.0f, (float)getWindow()->getWidth(), (float)getWindow()->getHeight(), 0.1f, 10000.0f);
-		trans->setCamera(camera);
+		trans->setCamera();
 
 		// test texture
 		texture = new Texture(GL_TEXTURE_2D, "../media/textures/test.png");
@@ -42,7 +43,7 @@ public:
 		//trans->setRotation(0, 0, 90);
 
 		obj = new OBJMesh("../media/models/box.obj");
-		testMesh = new Mesh();
+		/*testMesh = new Mesh();
 		Vertex vert[] = {
 			Vertex(0.0, 0.0, 0.0, 0.0, 0.0),
 			Vertex(0.0, 1.0, 0.0, 0.0, 1.0),
@@ -53,7 +54,13 @@ public:
 			0, 1, 2,
 			2, 3, 0
 		};
-		testMesh->addVertices(vert, 4, inde, 6);
+		testMesh->addVertices(vert, 4, inde, 6);*/
+
+		// 隐藏光标
+		getWindow()->setCursorVisible(false);
+
+		// 光标居中
+		getWindow()->setCenterCursor();
 	}
 
 	void render() override
@@ -74,43 +81,11 @@ public:
 	
 	void update() override
 	{
-		auto camera2 = trans->getCamera();
-		if (getWindow()->isKeyPressed(GLFW_KEY_W))
-		{
-			camera2->move(camera2->getForward(), 0.08f);
-		}
-		if (getWindow()->isKeyPressed(GLFW_KEY_S))
-		{
-			camera2->move(camera2->getForward(), -0.08f);
-		}
-		if (getWindow()->isKeyPressed(GLFW_KEY_A))
-		{
-			camera2->move(camera2->getLeft(), 0.08f);
-		}
-		if (getWindow()->isKeyPressed(GLFW_KEY_D))
-		{
-			camera2->move(camera2->getRight(), 0.08f);
-		}
-		if (getWindow()->isKeyPressed(GLFW_KEY_UP))
-		{
-			camera2->rotateX(-0.02f);
-		}
-		if (getWindow()->isKeyPressed(GLFW_KEY_DOWN))
-		{
-			camera2->rotateX(0.02f);
-		}
-		if (getWindow()->isKeyPressed(GLFW_KEY_LEFT))
-		{
-			camera2->rotateY(-0.02f);
-		}
-		if (getWindow()->isKeyPressed(GLFW_KEY_RIGHT))
-		{
-			camera2->rotateY(0.02f);
-		}
+		trans->getCamera()->update(getWindow(), 0.002f, 0.08f);
 	}
 private:
 	OBJMesh* obj;
-	Mesh* testMesh;
+	//Mesh* testMesh;
 	float tme;
 	Shader* shader;
 	Transform* trans;

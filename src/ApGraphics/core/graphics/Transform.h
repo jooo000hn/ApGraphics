@@ -22,8 +22,9 @@ namespace apanoo {
 		}
 
 		// 摄像机 TODO : 封装 setCamera 为静态
-		void setCamera(Camera camera){ m_Camera = camera; }
-		inline Camera* getCamera() { return &m_Camera; }
+		void setCamera();
+		void setCamera(Vector3& pos, Vector3& forward, Vector3& up);
+		inline Camera* getCamera() { return m_Camera; }
 
 		// 返回模型变换
 		Matrix4 getTransformation();
@@ -58,6 +59,6 @@ namespace apanoo {
 		float m_Fov;
 
 		// 摄像机
-		Camera m_Camera;
+		Camera* m_Camera;
 	};
 }

@@ -3,6 +3,7 @@
 #define  GLEW_STATIC
 #include "gl/glew.h"
 #include "glfw/glfw3.h"
+#include "../../maths/Maths.h"
 #include <iostream> 
 
 namespace apanoo {
@@ -18,8 +19,12 @@ namespace apanoo {
 		void update();
 		bool closed() const;
 
-		inline int getWidth() const { return m_Width; }
-		inline int getHeight() const { return m_Height; }
+		inline const int getWidth() const { return m_Width; }
+		inline const int getHeight() const { return m_Height; }
+		inline const double getCursorX() const { return mx; }
+		inline const double getCursorY() const { return my; }
+		inline const Vector2 getCursorPosition() const { return Vector2((float)mx, (float)my); }
+		inline const Vector2 getCenter() const { return Vector2(m_Width / 2.0f, m_Height / 2.0f); }
 		
 		// 是否处于按下状态
 		bool isKeyPressed(unsigned int keycode) const;
@@ -33,8 +38,14 @@ namespace apanoo {
 		// 鼠标点击
 		bool isMouseButtonClicked(unsigned int button) const;
 
-		// 获取鼠标位置
-		void getMousePosition(double& x, double& y) const;
+		// 设置光标位置
+		void setCursorPosition(double x, double y);
+
+		// 设置光标模式
+		void setCursorVisible(bool visible);
+
+		// 设置光标居中
+		void setCenterCursor();
 	private:
 		bool init();
 		friend void window_resize(GLFWwindow* window, int width, int height);
@@ -47,6 +58,7 @@ namespace apanoo {
 		int m_Width, m_Height;
 		GLFWwindow*  m_Window;
 		bool		 m_Closed;
+		bool	     m_CursorHide;
 
 		bool m_Keys[MAX_KEYS];
 		bool m_KeyState[MAX_KEYS];

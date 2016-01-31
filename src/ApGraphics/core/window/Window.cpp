@@ -12,6 +12,7 @@ namespace apanoo {
 		m_Title = title;
 		m_Width = width;
 		m_Height = height;
+		m_CursorHide = false;
 		if (!init())
 		{
 			glfwTerminate();
@@ -60,7 +61,6 @@ namespace apanoo {
 		glfwSetKeyCallback(m_Window, key_callback);
 		glfwSetMouseButtonCallback(m_Window, mouse_button_callback);
 		glfwSetCursorPosCallback(m_Window, cursor_position_callback);
-
 		glfwSwapInterval(0); // 关闭垂直同步
 
 		if (glewInit() != GLEW_OK)
@@ -126,10 +126,28 @@ namespace apanoo {
 		return m_MouseClicked[button];
 	}
 
-	void Window::getMousePosition(double& x, double& y) const
+	void Window::setCursorPosition(double x, double y)
 	{
-		x = mx;
-		y = my;
+		glfwSetCursorPos(m_Window, x, y);
+	}
+
+	void Window::setCursorVisible(bool visible)
+	{
+		if (visible && m_CursorHide)
+		{
+			glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+			m_CursorHide = false;
+		}
+		if (!visible && !m_CursorHide)
+		{
+			glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+			m_CursorHide = true;
+		}
+	}
+
+	void Window::setCenterCursor()
+	{
+		setCursorPosition(getCenter().getX(), getCenter().getY());
 	}
 
 	void Window::clear() const

@@ -9,7 +9,7 @@ namespace apanoo {
 
 	Transform::~Transform()
 	{
-
+		delete m_Camera;
 	}
 
 	// 透视投影,含模型变换和摄像机变换(MVP)
@@ -22,10 +22,20 @@ namespace apanoo {
 		Matrix4 projection = Matrix4().perspectiveMatrix(m_Fov, (float)m_Width / (float)m_Height, m_Near, m_Far);
 
 		// 摄像机矩阵(V)
-		Matrix4 cameraRotation = Matrix4().cameraMatrix(m_Camera.getForward(), m_Camera.getUp());
-		Matrix4 cameraTranslation = Matrix4().translationMatrix(Vector3(-m_Camera.getPosition().getX(), -m_Camera.getPosition().getY(), -m_Camera.getPosition().getZ()));
+		Matrix4 cameraRotation = Matrix4().cameraMatrix(m_Camera->getForward(), m_Camera->getUp());
+		Matrix4 cameraTranslation = Matrix4().translationMatrix(Vector3(-m_Camera->getPosition().getX(), -m_Camera->getPosition().getY(), -m_Camera->getPosition().getZ()));
 		
 		return projection * (cameraRotation * (cameraTranslation * transform));
+	}
+
+	void Transform::setCamera(Vector3& pos, Vector3& forward, Vector3& up)
+	{
+		m_Camera = new Camera(pos, forward, up);
+	}
+
+	void Transform::setCamera()
+	{
+		m_Camera = new Camera();
 	}
 
 	// 模型变换(M)

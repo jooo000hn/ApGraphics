@@ -31,22 +31,6 @@
 #include "../Vertex.h"
 
 namespace apanoo {
-	// 顶点
-	//struct Vertex
-	//{
-	//	Vector3 m_Pos;    // 顶点位置
-	//	Vector2 m_TexCoord; // 文理坐标
-	//	Vector3 m_Normal; // 法向
-	//
-	//	Vertex() {}
-	//
-	//	Vertex(const Vector3& pos, const Vector2& tex, const Vector3& normal)
-	//		: m_Pos(pos), m_TexCoord(tex), m_Normal(normal)
-	//	{
-	//		
-	//	}
-	//};
-
 	/*
 	 * assimp mesh : load model files by assimp lib
 	 */
@@ -87,6 +71,6 @@ namespace apanoo {
 		int     m_NumMaterials;
 		Shader* m_Shader;
 		std::vector<MeshEntry> m_MeshEntries;   // 所有子 mesh
-		std::vector<Texture*>  m_Textures;      // 所有文理图
+		std::vector<Texture*>  m_Textures;      // 所有纹理图
 	};
 }
