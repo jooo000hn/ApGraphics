@@ -1,5 +1,12 @@
 # all
 build/*
+deps*/bin/
+*.ilk
+*.pdb
+*.exe
+*.iobj
+*.ipdb
+*release/FreeImage.dll
 #################
 ## Eclipse
 #################
@@ -7,7 +14,6 @@ build/*
 *.pydevproject
 .project
 .metadata
-bin/
 tmp/
 *.tmp
 *.bak
