@@ -55,10 +55,7 @@ namespace apanoo {
 
 		// location = 0
 		glDisableVertexAttribArray(0);
-<<<<<<< HEAD:src/ApGraphics/core/graphics/model/Mesh.cpp
 		// location = 1
-=======
->>>>>>> origin/master:ApGraphics/ApGraphics/core/graphics/Mesh.cpp
 		glDisableVertexAttribArray(1);
 	}
 }
