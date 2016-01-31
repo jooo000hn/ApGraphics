@@ -4,7 +4,7 @@
 #include "window/Window.h"
 
 // mesh基类
-#include "graphics/Mesh.h"
+#include "graphics/model/Mesh.h"
 
 // obj文件加载
 #include "graphics/model/OBJMesh.h"
@@ -19,7 +19,8 @@
 #include "graphics/Camera.h"
 
 // shader
-#include "graphics/Shader.h"
-#include "graphics/BasicShader.h"
+#include "graphics/shader/Shader.h"
+#include "graphics/shader/ModelShader.h"
+#include "graphics/shader/PhongShader.h"
 
 #include "graphics/Material.h"

@@ -1,7 +1,7 @@
 #pragma once
 #include "gl/glew.h"
-#include "../../maths/maths.h"
-#include "Material.h"
+#include "../../../maths/maths.h"
+#include "../Material.h"
 
 namespace apanoo {
 	class Shader

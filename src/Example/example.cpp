@@ -11,7 +11,7 @@ public:
 		obj = nullptr;
 		shader = nullptr;
 		trans = nullptr;
-		texture = nullptr;
+		//texture = nullptr;
 		m_BtnClicked = false;
 		m_RoundCamera = false;
 	}
@@ -22,14 +22,18 @@ public:
 		//delete testMesh;
 		//delete shader;
 		delete trans;
-		delete texture;
+		//delete texture;
+		delete asmesh;
 	}
 	
 	void init() override
 	{
 		createWindow("ApGraphics", 960, 540);
 
-		shader = new BasicShader();
+		//shader = PhongShader::Instance();
+		//PhongShader::Instance()->setBaseColor(Vector3(0, 1, 1));
+		//PhongShader::Instance()->setAmbientLight(Vector3(0.4f, 0.4f, 0.4f));
+		shader = new ModelShader();
 		shader->enable();
 
 		trans = new Transform();
@@ -37,14 +41,14 @@ public:
 		trans->setCamera();
 
 		// test texture
-		texture = new Texture(GL_TEXTURE_2D, "../media/textures/test.png");
+		//texture = new Texture(GL_TEXTURE_2D, "../media/textures/test.png");
 
-		trans->setTranslation(0, 0, 5);
+		trans->setTranslation(0, 0, 50);
 		//trans->setScale(0.3f, 0.3f, 0.3f);
 		//trans->setRotation(0, 0, 90);
 
-		obj = new OBJMesh("../media/models/box.obj");
-		//asmesh = new ASMesh();
+		//obj = new OBJMesh("../media/models/box.obj");
+		asmesh = new ASMesh("../media/models/jeep1.3ds");
 		/*testMesh = new Mesh();
 		Vertex vert[] = {
 			Vertex(0.0, 0.0, 0.0, 0.0, 0.0),
@@ -65,9 +69,10 @@ public:
 		tme += 0.01f;
 		trans->setRotation(0, tme, 0);
 		shader->updateUniforms(trans->getTransformation(), trans->getProjectionTransformation());
-		texture->bind(GL_TEXTURE0);
-		obj->render();
+		//texture->bind(GL_TEXTURE0);
+		//obj->render();
 		//testMesh->render();
+		asmesh->render();
 
 		if (!m_BtnClicked && getWindow()->isMouseButtonClicked(GLFW_MOUSE_BUTTON_LEFT))
 		{
@@ -90,7 +95,7 @@ public:
 
 	void tick() override
 	{
-		std::cout << this->getFPS() << std::endl;
+		//std::cout << this->getFPS() << std::endl;
 	}
 	
 	void update() override
@@ -106,7 +111,7 @@ private:
 	float tme;
 	Shader* shader;
 	Transform* trans;
-	Texture* texture;
+	//Texture* texture;
 	ASMesh* asmesh;
 
 	bool m_BtnClicked;

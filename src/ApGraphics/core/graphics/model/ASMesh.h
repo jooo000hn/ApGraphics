@@ -1,3 +1,7 @@
+/*
+* ASMesh : assimp mesh, 使用开源库 assimp 加载模型文件
+* 支持格式 : obj, 3ds, mesh3d, fbx, md2, md3, md5...等40多种模型格式
+*/
 #pragma once
 #define INVALID_OGL_VALUE 0xFFFFFFFF
 
@@ -22,7 +26,7 @@
 #include "../../../maths/Maths.h"
 
 // shader
-#include "../Shader.h"
+#include "../shader/ModelShader.h"
 
 // texture
 #include "../Texture.h"
@@ -38,7 +42,7 @@ namespace apanoo {
 	{
 	public:
 		~ASMesh();
-		ASMesh(Shader& shader, const std::string& filename);
+		ASMesh(const std::string& filename);
 		void render();
 
 	private:

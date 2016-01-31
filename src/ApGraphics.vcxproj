@@ -160,13 +160,14 @@
   <ItemGroup>
     <ClInclude Include="ApGraphics\apgraphics.h" />
     <ClInclude Include="ApGraphics\core\core.h" />
-    <ClInclude Include="ApGraphics\core\graphics\BasicShader.h" />
+    <ClInclude Include="ApGraphics\core\graphics\shader\ModelShader.h" />
     <ClInclude Include="ApGraphics\core\graphics\Camera.h" />
     <ClInclude Include="ApGraphics\core\graphics\Material.h" />
-    <ClInclude Include="ApGraphics\core\graphics\Mesh.h" />
+    <ClInclude Include="ApGraphics\core\graphics\model\Mesh.h" />
     <ClInclude Include="ApGraphics\core\graphics\model\ASMesh.h" />
     <ClInclude Include="ApGraphics\core\graphics\model\OBJMesh.h" />
-    <ClInclude Include="ApGraphics\core\graphics\Shader.h" />
+    <ClInclude Include="ApGraphics\core\graphics\shader\PhongShader.h" />
+    <ClInclude Include="ApGraphics\core\graphics\shader\Shader.h" />
     <ClInclude Include="ApGraphics\core\graphics\Texture.h" />
     <ClInclude Include="ApGraphics\core\graphics\Transform.h" />
     <ClInclude Include="ApGraphics\log\Log.h" />
@@ -183,13 +184,14 @@
     <ClInclude Include="ApGraphics\utils\timer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ApGraphics\core\graphics\BasicShader.cpp" />
+    <ClCompile Include="ApGraphics\core\graphics\shader\ModelShader.cpp" />
     <ClCompile Include="ApGraphics\core\graphics\Camera.cpp" />
     <ClCompile Include="ApGraphics\core\graphics\Material.cpp" />
-    <ClCompile Include="ApGraphics\core\graphics\Mesh.cpp" />
+    <ClCompile Include="ApGraphics\core\graphics\model\Mesh.cpp" />
     <ClCompile Include="ApGraphics\core\graphics\model\ASMesh.cpp" />
     <ClCompile Include="ApGraphics\core\graphics\model\OBJMesh.cpp" />
-    <ClCompile Include="ApGraphics\core\graphics\Shader.cpp" />
+    <ClCompile Include="ApGraphics\core\graphics\shader\PhongShader.cpp" />
+    <ClCompile Include="ApGraphics\core\graphics\shader\Shader.cpp" />
     <ClCompile Include="ApGraphics\core\graphics\Texture.cpp" />
     <ClCompile Include="ApGraphics\core\graphics\Transform.cpp" />
     <ClCompile Include="ApGraphics\log\Log.cpp" />

@@ -3,10 +3,10 @@
 #include "Shader.h"
 
 namespace apanoo {
-	class BasicShader : public Shader
+	class ModelShader : public Shader
 	{
 	public:
-		BasicShader();
+		ModelShader();
 
 		void updateUniforms(Matrix4 worldMatrix, Matrix4 projectedMatrix);
 	};

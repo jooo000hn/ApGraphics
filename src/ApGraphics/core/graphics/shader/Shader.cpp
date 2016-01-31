@@ -2,8 +2,8 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include "../../log/Log.h"
-#include "../../utils/FileUtils.h"
+#include "../../../log/Log.h"
+#include "../../../utils/FileUtils.h"
 
 namespace apanoo {
 	Shader::Shader()
@@ -151,5 +151,4 @@ namespace apanoo {
 		}
 		return location;
 	}
-
 }

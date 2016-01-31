@@ -41,13 +41,20 @@ namespace apanoo {
 	{
 		for (unsigned int i = 0; i < m_Textures.size(); i++)
 		{
-			free(m_Textures[i]);
+			delete m_Textures[i];
 		}
+
+		// disable shader
+		m_Shader->disable();
 	}
 
-	ASMesh::ASMesh(Shader& shader, const std::string& filename)
-		: m_Shader(&shader), m_IsLoaded(false)
+	ASMesh::ASMesh(const std::string& filename)
+		: m_IsLoaded(false)
 	{
+		// 启用 shader
+		m_Shader = new ModelShader();
+		m_Shader->enable();
+
 		if (!loadModelFromFile(filename))
 		{
 			std::cout << "failed to load assimp mesh: " << filename << std::endl;
@@ -79,16 +86,16 @@ namespace apanoo {
 			aiMesh* paiMesh = scene->mMeshes[i];
 
 			// 输出每张 mesh 的面数, 顶点数和纹理索引
-			std::cout << "  - Mesh :" << i << " Face counts:" << paiMesh->mNumFaces << "Vertex counts" 
-				<< paiMesh->mNumVertices << "Material index" << paiMesh->mMaterialIndex << std::endl;
+			std::cout << "  - Mesh :" << i << " Face counts: " << paiMesh->mNumFaces << " Vertex counts: " 
+				<< paiMesh->mNumVertices << " Material index: " << paiMesh->mMaterialIndex << std::endl;
 
 			// 分别初始化每张 mesh
 			initMesh(i, paiMesh);
 		}
-		std::cout << "Texture counts: " << scene->mNumMaterials << std::endl;
+		std::cout << " Texture counts: " << scene->mNumMaterials << std::endl;
 
 		// 加载所有 texture
-		if (scene->mNumMaterials > 1)
+		if (scene->mNumMaterials > 0)
 		{
 			initMaterial(scene, filepath);
 		}
@@ -107,7 +114,7 @@ namespace apanoo {
 		vertices.reserve(paiMesh->mNumVertices);
 		indices.reserve(paiMesh->mNumFaces);
 
-		std::cout << "mesh " << index << "init:" << std::endl;
+		std::cout << "mesh " << index << " init! " << std::endl;
 		for (unsigned int i = 0; i < paiMesh->mNumVertices; i++) {
 			const aiVector3D* pPos = &(paiMesh->mVertices[i]);
 			const aiVector3D* pNormal = &(paiMesh->mNormals[i]);
@@ -120,9 +127,9 @@ namespace apanoo {
 					);
 
 			// log vertex
-			std::cout << " - Vertex : " << "pos(" << v.m_Pos.getX() << "," << v.m_Pos.getY() << "," << v.m_Pos.getZ() << ")" 
-				<< "tex(" << v.m_TexCoord.getX() << "," << v.m_TexCoord.getY() << ")" 
-				<< "normal(" << v.m_Normal.getX() << "," << v.m_Normal.getY() << "," << v.m_Normal.getZ() << ")" << std::endl;
+			//std::cout << " - Vertex : " << "pos(" << v.m_Pos.getX() << "," << v.m_Pos.getY() << "," << v.m_Pos.getZ() << ")" 
+			//	<< "tex(" << v.m_TexCoord.getX() << "," << v.m_TexCoord.getY() << ")" 
+			//	<< "normal(" << v.m_Normal.getX() << "," << v.m_Normal.getY() << "," << v.m_Normal.getZ() << ")" << std::endl;
 			vertices.push_back(v);
 		}
 
@@ -192,11 +199,10 @@ namespace apanoo {
 
 		bool Ret = true;
 		// 加载纹理
-		for (unsigned int i = 1; i < pScene->mNumMaterials; i++)
+		for (unsigned int i = 0; i < pScene->mNumMaterials; i++)
 		{
 			const aiMaterial* pMaterial = pScene->mMaterials[i];
 			m_Textures[i] = NULL;
-
 			if (pMaterial->GetTextureCount(aiTextureType_DIFFUSE) > 0) {
 				aiString path;
 
@@ -209,9 +215,6 @@ namespace apanoo {
 						delete m_Textures[i];
 						m_Textures[i] = NULL;
 						Ret = false;
-					}
-					else {
-						std::cout << "Loaded texture : " << fullPath << std::endl;
 					}
 				}
 			}

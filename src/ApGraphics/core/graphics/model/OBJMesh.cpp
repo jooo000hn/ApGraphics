@@ -1,4 +1,3 @@
-// 只支持3角面
 #include "OBJMesh.h"
 #include <iostream>
 #include <sstream>
@@ -7,7 +6,6 @@
 #include "../../../log/Log.h"
 
 namespace apanoo {
-
 	OBJMesh::OBJMesh(const char* filename)
 		: Mesh()
 	{
@@ -84,13 +82,9 @@ namespace apanoo {
 		// 储存面的顶点索引
 		int indexCount = vector_indices.size();
 		int* indices = new int[indexCount];
-		for (int i = 0;i < indexCount / 3;i++)
+		for (int i = 0;i < indexCount;i++)
 		{
-			indices[  3*i  ] = vector_indices.at(3 * i) - 1;
-			indices[3*i + 1] = vector_indices.at(3*i + 1) - 1;
-			indices[3*i + 2] = vector_indices.at(3*i + 2) - 1;
-			
-			// std::cout << indices[3 * i] << " " << indices[3 * i + 1] << " " << indices[3 * i + 2] << std::endl;
+			indices[i] = vector_indices.at(i) - 1;
 		}
 		
 		addVertices(*vertives, vertCount, indices, indexCount);

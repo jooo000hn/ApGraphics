@@ -50,7 +50,7 @@ namespace apanoo {
 		delete[] pixels;
 
 		std::cout << "load texture success: " << m_FileName.c_str() << std::endl;
-		Log::Instance()->OutputSuccess("load texture success: %s", m_FileName.c_str());
+		// Log::Instance()->OutputSuccess("load texture success: %s", m_FileName.c_str());
 
 		return true;
 	}
