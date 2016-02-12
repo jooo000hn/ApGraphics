@@ -42,7 +42,7 @@ namespace apanoo {
 	Matrix4 Transform::getTransformation()
 	{
 		Matrix4 translation = Matrix4().translationMatrix(m_Translation);
-		Matrix4 rotation = Matrix4().rotationEulerMatrix(m_Rotation.getX(), m_Rotation.getY(), m_Rotation.getZ());
+		Matrix4 rotation = Matrix4().rotationQuaternionMatrix(m_Rotation.getX(), m_Rotation.getY(), m_Rotation.getZ());
 		Matrix4 scale = Matrix4().scaleMatrix(m_Scale);
 		
 		return translation * (rotation * scale);

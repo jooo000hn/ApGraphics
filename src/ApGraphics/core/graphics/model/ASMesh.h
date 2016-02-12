@@ -1,6 +1,6 @@
 /*
 * ASMesh : assimp mesh, 使用开源库 assimp 加载模型文件
-* 支持格式 : obj, 3ds, mesh3d, fbx, md2, md3, md5...等40多种模型格式
+* 支持格式 : obj, 3ds, ms3d, fbx, md2, md3, md5...等40多种模型格式
 */
 #pragma once
 #define INVALID_OGL_VALUE 0xFFFFFFFF
@@ -43,11 +43,12 @@ namespace apanoo {
 	public:
 		~ASMesh();
 		ASMesh(const std::string& filename);
+		ASMesh(const std::string& filename, bool flipUVs);
 		void render();
 
 	private:
 		bool loadModelFromFile(const std::string& filename);
-		void initMesh(unsigned int Index, const aiMesh* paiMesh);
+		void initMesh(const aiScene* pScene, const aiNode* pNode);
 		bool initMaterial(const aiScene* pScene, const std::string& filePath);
 
 	private:
@@ -72,9 +73,12 @@ namespace apanoo {
 
 	private:
 		bool    m_IsLoaded;
-		int     m_NumMaterials;
+		bool	m_FlipUVs;					    // 翻转纹理 y 坐标 
+		int     m_NumMaterials;					// 纹理数量
 		Shader* m_Shader;
 		std::vector<MeshEntry> m_MeshEntries;   // 所有子 mesh
 		std::vector<Texture*>  m_Textures;      // 所有纹理图
+		unsigned int m_NumMeshEntries;
+		std::string m_FilePath;
 	};
 }

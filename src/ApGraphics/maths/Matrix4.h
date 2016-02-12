@@ -10,6 +10,7 @@
 #include "Vector3.h"
 #include "Vector4.h"
 
+class Quaternion;
 namespace apanoo {
 	/*
 	* 注意：m[i][j] j表示行，i表示列
@@ -19,7 +20,16 @@ namespace apanoo {
 	class Matrix4
 	{
 	public:
-		Matrix4() { }
+		Matrix4()
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				for (int j = 0; j < 4; j++)
+				{
+					m[i][j] = 0.0f;
+				}
+			}
+		}
 
 		Matrix4(const Matrix4& r)
 		{
@@ -31,6 +41,7 @@ namespace apanoo {
 				}
 			}
 		}
+
 
 		Matrix4(float m00, float m01, float m02, float m03,
 			float m10, float m11, float m12, float m13,
@@ -62,6 +73,9 @@ namespace apanoo {
 			(*this)[3][3] = m33;
 		}
 
+		// 使用四元数初始化矩阵
+		Matrix4(const Quaternion& quaternion);
+
 		// 单位矩阵
 		Matrix4 identityMatrix();
 
@@ -71,8 +85,11 @@ namespace apanoo {
 		// 平移
 		Matrix4 translationMatrix(const Vector3& r);
 
-		// 欧拉角旋转
+		// 欧拉角旋转 : 会产生万向节死锁
 		Matrix4 rotationEulerMatrix(float rotateX, float rotateY, float rotateZ);
+
+		// 四元旋转 ： 不会产生万向节死锁
+		Matrix4 rotationQuaternionMatrix(float rotateX, float rotateY, float rotateZ);
 
 		Matrix4 rotationFromVectorsMatrix(const Vector3& n, const Vector3& v, const Vector3& u);
 

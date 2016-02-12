@@ -48,28 +48,8 @@ namespace apanoo {
 
 	Vector3 Vector3::rotate(float angle, const Vector3& axis) const
 	{
-		 //const float sin = sinf(-angle);
-		 //const float cos = cosf(-angle);
-
-		 //return this->cross(axis * sin) +		     // Rotation on local X
-			//   (*this * cos) +                     // Rotation on local Z
-			//   axis * this->dot(axis * (1 - cos)); // Rotation on local Y
-
-		const float sinHalfAngle = sinf(angle/2);
-		const float cosHalfAngle = cosf(angle/2);
-
-		const float Rx = axis.getX() * sinHalfAngle;
-		const float Ry = axis.getY() * sinHalfAngle;
-		const float Rz = axis.getZ() * sinHalfAngle;
-		const float Rw = cosHalfAngle;
-		
-		Quaternion rotationQ(Rx, Ry, Rz, Rw);
-		Quaternion conjugateQ = rotationQ.conjugate();
-		Quaternion w = rotationQ * (*this) * conjugateQ;
-		
-		Vector3 ret(w.getX(), w.getY(), w.getZ());
-		
-		return ret;
+		Quaternion rotationQ(axis, angle);
+		return rotate(rotationQ);
 	}
 
 	Vector3 Vector3::rotate(const Quaternion& rotation) const

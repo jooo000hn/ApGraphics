@@ -1,6 +1,32 @@
 #include "Matrix4.h"
+#include "Quaternion.h"
 
 namespace apanoo {
+
+	Matrix4::Matrix4(const Quaternion& quaternion)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				m[i][j] = 0.0f;
+			}
+		}
+		m[0][0] = 1.0f - 2.0f * (quaternion.getY() * quaternion.getY() + quaternion.getZ() * quaternion.getZ());
+		m[0][1] = 2.0f * quaternion.getX() * quaternion.getY() + 2.0f * quaternion.getZ() * quaternion.getW();
+		m[0][2] = 2.0f * quaternion.getX() * quaternion.getZ() - 2.0f * quaternion.getY() * quaternion.getW();
+		
+		m[1][0] = 2.0f * quaternion.getX() * quaternion.getY() - 2.0f * quaternion.getZ() * quaternion.getW();
+		m[1][1] = 1.0f - 2.0f * (quaternion.getX() * quaternion.getX() + quaternion.getZ() * quaternion.getZ());
+		m[1][2] = 2.0f * quaternion.getY() * quaternion.getZ() + 2.0f * quaternion.getX() * quaternion.getW();
+		
+		m[2][0] = 2.0f * quaternion.getZ() * quaternion.getX() + 2.0f * quaternion.getY() * quaternion.getW();
+		m[2][1] = 2.0f * quaternion.getY() * quaternion.getZ() - 2.0f * quaternion.getX() * quaternion.getW();
+		m[2][2] = 1.0f - 2.0f * (quaternion.getX() * quaternion.getX() + quaternion.getY() * quaternion.getY());
+		
+		m[3][3] = 1.0f;
+	}
+
 	Matrix4 Matrix4::identityMatrix()
 	{
 		for (unsigned int i = 0; i < 4; i++)
@@ -84,6 +110,16 @@ namespace apanoo {
 		*this = rz * ry * rx;
 
 		return *this;
+	}
+
+	// 由四元数旋转转化为旋转矩阵
+	apanoo::Matrix4 Matrix4::rotationQuaternionMatrix(float rotateX, float rotateY, float rotateZ)
+	{
+		Quaternion quaX(Vector3(1, 0, 0), rotateX);
+		Quaternion quaY(Vector3(0, 1, 0), rotateY);
+		Quaternion quaZ(Vector3(0, 0, 1), rotateZ);
+		auto a = Matrix4(quaX * quaY * quaZ);
+		return Matrix4(quaX * quaY * quaZ);
 	}
 
 	Matrix4 Matrix4::rotationFromVectorsMatrix(const Vector3& n, const Vector3& v, const Vector3& u)
@@ -283,7 +319,7 @@ namespace apanoo {
 		float determinant = (*this)[0][0] * result[0][0] + (*this)[0][1] * result[1][0] + (*this)[0][2] * result[2][0] + (*this)[0][3] * result[3][0];
 		determinant = 1.0f / determinant;
 
-		// 求逆矩阵元素
+		// 求逆矩阵
 		for (unsigned int i = 0; i < 4; i++)
 		{
 			for (unsigned int j = 0; j < 4; j++)

@@ -7,8 +7,8 @@ namespace apanoo {
 	Camera::Camera(Vector3& pos, Vector3& forward, Vector3& up)
 		: m_Position(pos), m_Forward(forward), m_Up(up)
 	{
-		m_Up = m_Up.normalized();
-		m_Forward = m_Forward.normalized();
+		this->setUp(m_Up.normalized());
+		this->setForward(m_Forward.normalized());
 	}
 
 	Camera::Camera()
@@ -85,17 +85,15 @@ namespace apanoo {
 	{
 		Vector3 Haxis = yAxis.cross(m_Forward).normalized();
 		
-		m_Forward = m_Forward.rotate(angle, Haxis).normalized();
-
-		m_Up = m_Forward.cross(Haxis).normalized();
+		this->setForward(m_Forward.rotate(angle, Haxis).normalized());
+		this->setUp(m_Forward.cross(Haxis).normalized());
 	}
 
 	void Camera::rotateY(float angle)
 	{
 		Vector3 Haxis = yAxis.cross(m_Forward).normalized();
 
-		m_Forward = m_Forward.rotate(angle, yAxis).normalized();
-
-		m_Up = m_Forward.cross(Haxis).normalized();
+		this->setForward(m_Forward.rotate(angle, yAxis).normalized());
+		this->setUp(m_Forward.cross(Haxis).normalized());
 	}
 }
