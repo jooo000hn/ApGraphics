@@ -66,12 +66,6 @@ namespace apanoo {
 		}
 	}
 
-	ASMesh::ASMesh(const std::string& filename)
-		: ASMesh(filename, false)
-	{
-		
-	}
-
 	// ╪сть model
 	bool ASMesh::loadModelFromFile(const std::string& filepath)
 	{

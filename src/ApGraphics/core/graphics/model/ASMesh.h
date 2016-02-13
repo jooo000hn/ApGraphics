@@ -42,8 +42,7 @@ namespace apanoo {
 	{
 	public:
 		~ASMesh();
-		ASMesh(const std::string& filename);
-		ASMesh(const std::string& filename, bool flipUVs);
+		ASMesh(const std::string& filename, bool flipUVs = false);
 		void render();
 
 	private:

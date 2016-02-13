@@ -112,15 +112,15 @@ namespace apanoo {
 		return *this;
 	}
 
-	// 由四元数旋转转化为旋转矩阵
-	apanoo::Matrix4 Matrix4::rotationQuaternionMatrix(float rotateX, float rotateY, float rotateZ)
-	{
-		Quaternion quaX(Vector3(1, 0, 0), rotateX);
-		Quaternion quaY(Vector3(0, 1, 0), rotateY);
-		Quaternion quaZ(Vector3(0, 0, 1), rotateZ);
-		auto a = Matrix4(quaX * quaY * quaZ);
-		return Matrix4(quaX * quaY * quaZ);
-	}
+	//// 由四元数旋转转化为旋转矩阵
+	//apanoo::Matrix4 Matrix4::rotationQuaternionMatrix(float rotateX, float rotateY, float rotateZ)
+	//{
+	//	Quaternion quaX(Vector3(1, 0, 0), rotateX);
+	//	Quaternion quaY(Vector3(0, 1, 0), rotateY);
+	//	Quaternion quaZ(Vector3(0, 0, 1), rotateZ);
+	//	auto a = Matrix4(quaX * quaY * quaZ);
+	//	return Matrix4(quaX * quaY * quaZ);
+	//}
 
 	Matrix4 Matrix4::rotationFromVectorsMatrix(const Vector3& n, const Vector3& v, const Vector3& u)
 	{
