@@ -43,7 +43,7 @@ public:
 		// test texture
 		//texture = new Texture(GL_TEXTURE_2D, "../media/textures/test.png");
 
-		trans->setTranslation(0, 0, 50);
+		trans->setTranslation(0, 0, 20);
 		//trans->setScale(0.3f, 0.3f, 0.3f);
 		//trans->setRotation(0, 0, 90);
 
@@ -65,8 +65,6 @@ public:
 
 	void render() override
 	{
-		
-		tme += 0.01f;
 		trans->setRotation(0, tme, 0);
 		shader->updateUniforms(trans->getTransformation(), trans->getProjectionTransformation());
 		//texture->bind(GL_TEXTURE0);
@@ -95,11 +93,12 @@ public:
 
 	void tick() override
 	{
-		//std::cout << this->getFPS() << std::endl;
+		std::cout << this->getFPS() << std::endl;
 	}
 	
 	void update() override
 	{
+		tme += 0.01f;
 		if (m_RoundCamera)
 		{
 			trans->getCamera()->update(getWindow(), 0.002f, 0.08f);
