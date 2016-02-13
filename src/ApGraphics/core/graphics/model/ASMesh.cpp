@@ -46,14 +46,17 @@ namespace apanoo {
 
 		// disable shader
 		m_Shader->disable();
+		delete m_Shader;
 	}
 
-	ASMesh::ASMesh(const std::string& filename)
-		: m_IsLoaded(false)
+	ASMesh::ASMesh(const std::string& filename, bool flipUVs)
+		: m_IsLoaded(false), m_NumMeshEntries(0), m_FilePath(filename)
 	{
 		// 启用 shader
 		m_Shader = new ModelShader();
 		m_Shader->enable();
+
+		m_FlipUVs = flipUVs;
 
 		if (!loadModelFromFile(filename))
 		{
@@ -63,11 +66,19 @@ namespace apanoo {
 		}
 	}
 
+	ASMesh::ASMesh(const std::string& filename)
+		: ASMesh(filename, false)
+	{
+		
+	}
+
 	// 加载 model
 	bool ASMesh::loadModelFromFile(const std::string& filepath)
 	{
 		Assimp::Importer importer;
-		const aiScene* scene = importer.ReadFile(filepath, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs);
+
+		const aiScene* scene = importer.ReadFile(filepath, m_FlipUVs ? (aiProcessPreset_TargetRealtime_Quality | aiProcess_FlipUVs)
+			: aiProcessPreset_TargetRealtime_Quality);
 
 		if (!scene)
 		{
@@ -79,72 +90,67 @@ namespace apanoo {
 		m_MeshEntries.resize(scene->mNumMeshes);
 		m_Textures.resize(scene->mNumMaterials);
 
-		// 遍历所有 mesh
-		std::cout << "Mesh counts: " << scene->mNumMeshes << std::endl;
-		for (unsigned int i = 0; i < scene->mNumMeshes; i++)
-		{
-			aiMesh* paiMesh = scene->mMeshes[i];
-
-			// 输出每张 mesh 的面数, 顶点数和纹理索引
-			std::cout << "  - Mesh :" << i << " Face counts: " << paiMesh->mNumFaces << " Vertex counts: " 
-				<< paiMesh->mNumVertices << " Material index: " << paiMesh->mMaterialIndex << std::endl;
-
-			// 分别初始化每张 mesh
-			initMesh(i, paiMesh);
-		}
-		std::cout << " Texture counts: " << scene->mNumMaterials << std::endl;
+		initMesh(scene, scene->mRootNode); // init mesh
 
 		// 加载所有 texture
 		if (scene->mNumMaterials > 0)
 		{
-			initMaterial(scene, filepath);
+			if (!initMaterial(scene, filepath))
+			{
+				std::cout << "Material 加载不完整" << std::endl;
+				m_IsLoaded = false;
+				return false;
+			}
 		}
-
 		m_IsLoaded = true;
 		return true;
 	}
 
-	void ASMesh::initMesh(unsigned int index, const aiMesh* paiMesh)
+	void ASMesh::initMesh(const aiScene* pScene, const aiNode* pNode)
 	{
-		m_MeshEntries[index].m_MaterialIndex = paiMesh->mMaterialIndex;
-		std::vector<Vertex> vertices;
-		std::vector<unsigned int> indices;
-		const aiVector3D Zero3D(0.0f, 0.0f, 0.0f);
-
-		vertices.reserve(paiMesh->mNumVertices);
-		indices.reserve(paiMesh->mNumFaces);
-
-		std::cout << "mesh " << index << " init! " << std::endl;
-		for (unsigned int i = 0; i < paiMesh->mNumVertices; i++) {
-			const aiVector3D* pPos = &(paiMesh->mVertices[i]);
-			const aiVector3D* pNormal = &(paiMesh->mNormals[i]);
-			const aiVector3D* pTexCoord = paiMesh->HasTextureCoords(0) ?
-				&(paiMesh->mTextureCoords[0][i]) : &Zero3D;
-
-			Vertex v(Vector3(pPos->x, pPos->y, pPos->z),
-					 Vector2(pTexCoord->x, pTexCoord->y),
-					 Vector3(pNormal->x, pNormal->y, pNormal->z)
-					);
-
-			// log vertex
-			//std::cout << " - Vertex : " << "pos(" << v.m_Pos.getX() << "," << v.m_Pos.getY() << "," << v.m_Pos.getZ() << ")" 
-			//	<< "tex(" << v.m_TexCoord.getX() << "," << v.m_TexCoord.getY() << ")" 
-			//	<< "normal(" << v.m_Normal.getX() << "," << v.m_Normal.getY() << "," << v.m_Normal.getZ() << ")" << std::endl;
-			vertices.push_back(v);
-		}
-
-		// 初始化顶点索引
-		for (unsigned int i = 0; i < paiMesh->mNumFaces; i++)
+		for (unsigned int n = 0; n < pNode->mNumMeshes; ++n)
 		{
-			const aiFace& Face = paiMesh->mFaces[i];
-			assert(Face.mNumIndices == 3);
-			indices.push_back(Face.mIndices[0]);
-			indices.push_back(Face.mIndices[1]);
-			indices.push_back(Face.mIndices[2]);
+			const struct aiMesh* paiMesh = pScene->mMeshes[pNode->mMeshes[n]];
+			
+			std::vector<Vertex> vertices;
+			std::vector<unsigned int> indices;
+			const aiVector3D Zero3D(0.0f, 0.0f, 0.0f);
+			vertices.reserve(paiMesh->mNumVertices);
+			indices.reserve(paiMesh->mNumFaces);
+			std::cout << "mesh : " << paiMesh->mName.C_Str() << m_NumMeshEntries << " init! " << std::endl;
+			// 设置 mesh 的纹理索引
+			m_MeshEntries[m_NumMeshEntries].m_MaterialIndex = paiMesh->mMaterialIndex;
+
+			for (unsigned int i = 0; i < paiMesh->mNumVertices; i++) {
+				const aiVector3D* pPos = &(paiMesh->mVertices[i]);
+				const aiVector3D* pNormal = &(paiMesh->mNormals[i]);
+				const aiVector3D* pTexCoord = paiMesh->HasTextureCoords(0) ?
+					&(paiMesh->mTextureCoords[0][i]) : &Zero3D;
+
+				Vertex v(Vector3(pPos->x, pPos->y, pPos->z),
+					Vector2(pTexCoord->x, pTexCoord->y),   
+					Vector3(pNormal->x, pNormal->y, pNormal->z)
+					);
+				vertices.push_back(v);
+			}
+			// 初始化顶点索引
+			for (unsigned int i = 0; i < paiMesh->mNumFaces; i++)
+			{
+				const aiFace& Face = paiMesh->mFaces[i];
+				assert(Face.mNumIndices == 3);
+				indices.push_back(Face.mIndices[0]);
+				indices.push_back(Face.mIndices[1]);
+				indices.push_back(Face.mIndices[2]);
+			}
+
+			// 初始化 mesh
+			m_MeshEntries[m_NumMeshEntries++].init(vertices, indices);
 		}
 
-		// 初始化 mesh
-		m_MeshEntries[index].init(vertices, indices);
+		for (unsigned int i = 0; i < pNode->mNumChildren; i++)
+		{
+			initMesh(pScene, pNode->mChildren[i]);
+		}
 	}
 
 	void ASMesh::render()
@@ -168,10 +174,9 @@ namespace apanoo {
 
 			const unsigned int materialIndex = m_MeshEntries[i].m_MaterialIndex;
 
-			if (materialIndex < m_Textures.size() && m_Textures[materialIndex]) {
+			if (materialIndex < m_Textures.size() && m_Textures[materialIndex]) 
+			{
 				m_Textures[materialIndex]->bind(GL_TEXTURE0);
-				// prog->setUniform("Tex2", 0);
-				// cout<<"Draw "<<i<<endl;
 			}
 
 			glDrawElements(GL_TRIANGLES, m_MeshEntries[i].m_NumIndices, GL_UNSIGNED_INT, 0);
@@ -184,7 +189,7 @@ namespace apanoo {
 
 	bool ASMesh::initMaterial(const aiScene* pScene, const std::string& filePath)
 	{
-		std::string::size_type slashIndex = filePath.find_last_of("/");
+		std::string::size_type slashIndex = filePath.find_last_of("\\/");
 		std::string dir;
 
 		if (slashIndex == std::string::npos) {
@@ -206,7 +211,7 @@ namespace apanoo {
 			if (pMaterial->GetTextureCount(aiTextureType_DIFFUSE) > 0) {
 				aiString path;
 
-				if (pMaterial->GetTexture(aiTextureType_DIFFUSE, 0, &path, NULL, NULL, NULL, NULL, NULL) == AI_SUCCESS) {
+				if (pMaterial->GetTexture(aiTextureType_DIFFUSE, 0, &path) == AI_SUCCESS) {
 					std::string fullPath = dir + "/" + path.data;
 					m_Textures[i] = new Texture(GL_TEXTURE_2D, fullPath.c_str());
 
@@ -217,12 +222,6 @@ namespace apanoo {
 						Ret = false;
 					}
 				}
-			}
-
-			// 为无纹理 model 加载默认纹理 
-			if (m_Textures[i] == NULL) {
-				m_Textures[i] = new Texture(GL_TEXTURE_2D, "../media/textures/basic.png");
-				Ret = m_Textures[i] != NULL ? true : false;
 			}
 		}
 		return Ret;

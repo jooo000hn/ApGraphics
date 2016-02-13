@@ -48,7 +48,7 @@ public:
 		//trans->setRotation(0, 0, 90);
 
 		//obj = new OBJMesh("../media/models/box.obj");
-		asmesh = new ASMesh("../media/models/jeep1.3ds");
+		asmesh = new ASMesh("../media/models/tank/tank.obj");
 		/*testMesh = new Mesh();
 		Vertex vert[] = {
 			Vertex(0.0, 0.0, 0.0, 0.0, 0.0),

@@ -19,7 +19,10 @@ namespace apanoo {
 		Vector3 getLeft();
 		Vector3 getRight();
 
+		// ÉãÏñ»úÈÆxÖáĞı×ª
 		void rotateX(float angle);
+
+		// ÉãÏñ»úÈÆyÖáĞı×ª
 		void rotateY(float angle);
 
 		inline Vector3& getPosition() { return m_Position; }

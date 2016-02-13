@@ -1,4 +1,7 @@
-# all
+#################
+## Current Project
+#################
+
 build/*
 deps/*/bin/
 *.ilk
@@ -6,7 +9,7 @@ deps/*/bin/
 *.exe
 *.iobj
 *.ipdb
-*release/FreeImage.dll
+
 #################
 ## Eclipse
 #################
