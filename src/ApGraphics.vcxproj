@@ -24,8 +24,6 @@
     <ClCompile Include="ApGraphics\core\graphics\model\ASMesh.cpp" />
     <ClCompile Include="ApGraphics\core\graphics\model\Mesh.cpp" />
     <ClCompile Include="ApGraphics\core\graphics\model\OBJMesh.cpp" />
-    <ClCompile Include="ApGraphics\core\graphics\shader\ModelShader.cpp" />
-    <ClCompile Include="ApGraphics\core\graphics\shader\PhongShader.cpp" />
     <ClCompile Include="ApGraphics\core\graphics\shader\Shader.cpp" />
     <ClCompile Include="ApGraphics\core\graphics\Texture.cpp" />
     <ClCompile Include="ApGraphics\core\graphics\Transform.cpp" />
@@ -46,8 +44,6 @@
     <ClInclude Include="ApGraphics\core\graphics\model\ASMesh.h" />
     <ClInclude Include="ApGraphics\core\graphics\model\Mesh.h" />
     <ClInclude Include="ApGraphics\core\graphics\model\OBJMesh.h" />
-    <ClInclude Include="ApGraphics\core\graphics\shader\ModelShader.h" />
-    <ClInclude Include="ApGraphics\core\graphics\shader\PhongShader.h" />
     <ClInclude Include="ApGraphics\core\graphics\shader\Shader.h" />
     <ClInclude Include="ApGraphics\core\graphics\Texture.h" />
     <ClInclude Include="ApGraphics\core\graphics\Transform.h" />
@@ -117,14 +113,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)build\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)deps\glew\include;$(SolutionDir)deps\glfw\include;$(SolutionDir)deps\FreeImage\include;$(SolutionDir)deps\assimp\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)deps\glew\lib;$(SolutionDir)deps\glfw\lib;$(SolutionDir)deps\FreeImage\lib;$(SolutionDir)deps\assimp\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)deps\glew\include;$(SolutionDir)deps\glfw\include;$(SolutionDir)deps\FreeImage\include;$(SolutionDir)deps\assimp\include;$(SolutionDir)deps\freetype-gl\include;$(SolutionDir)deps\FreeType\include;$(SolutionDir)deps\AntTweakBar\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)deps\glew\lib;$(SolutionDir)deps\glfw\lib;$(SolutionDir)deps\FreeImage\lib;$(SolutionDir)deps\assimp\lib;$(SolutionDir)deps\freetype-gl\lib;$(SolutionDir)deps\FreeType\lib;$(SolutionDir)deps\AntTweakBar\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)build\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)deps\glew\include;$(SolutionDir)deps\glfw\include;$(SolutionDir)deps\FreeImage\include;$(SolutionDir)deps\assimp\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)deps\glew\lib;$(SolutionDir)deps\glfw\lib;$(SolutionDir)deps\FreeImage\lib;$(SolutionDir)deps\assimp\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)deps\glew\include;$(SolutionDir)deps\glfw\include;$(SolutionDir)deps\FreeImage\include;$(SolutionDir)deps\assimp\include;$(SolutionDir)deps\freetype-gl\include;$(SolutionDir)deps\FreeType\include;$(SolutionDir)deps\AntTweakBar\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)deps\glew\lib;$(SolutionDir)deps\glfw\lib;$(SolutionDir)deps\FreeImage\lib;$(SolutionDir)deps\assimp\lib;$(SolutionDir)deps\freetype-gl\lib;$(SolutionDir)deps\FreeType\lib;$(SolutionDir)deps\AntTweakBar\lib;$(LibraryPath)</LibraryPath>
     <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -151,7 +147,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glew32s.lib;opengl32.lib;FreeImage.lib;glfw3d.lib;assimp-vc140-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32s.lib;opengl32.lib;freetype-gl.lib;FreeType.lib;AntTweakBar.lib;FreeImage.lib;glfw3d.lib;assimp-vc140-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
       <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
     </Link>
@@ -183,7 +179,7 @@
       <GenerateDebugInformation>No</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>glew32s.lib;opengl32.lib;FreeImage.lib;glfw3.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32s.lib;opengl32.lib;freetype-gl.lib;FreeType.lib;AntTweakBar.lib;FreeImage.lib;glfw3.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>

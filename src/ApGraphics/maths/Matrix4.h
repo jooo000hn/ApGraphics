@@ -88,7 +88,7 @@ namespace apanoo {
 		// 欧拉角旋转 : 会产生万向节死锁
 		Matrix4 rotationEulerMatrix(float rotateX, float rotateY, float rotateZ);
 
-		// 四元旋转 ： 不会产生万向节死锁
+		// 四元旋转 
 		//Matrix4 rotationQuaternionMatrix(float rotateX, float rotateY, float rotateZ);
 
 		Matrix4 rotationFromVectorsMatrix(const Vector3& n, const Vector3& v, const Vector3& u);

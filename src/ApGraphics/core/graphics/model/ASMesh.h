@@ -25,8 +25,7 @@
 // maths
 #include "../../../maths/Maths.h"
 
-// shader
-#include "../shader/ModelShader.h"
+#include "../shader/Shader.h"
 
 // texture
 #include "../Texture.h"
@@ -74,7 +73,6 @@ namespace apanoo {
 		bool    m_IsLoaded;
 		bool	m_FlipUVs;					    // 翻转纹理 y 坐标 
 		int     m_NumMaterials;					// 纹理数量
-		Shader* m_Shader;
 		std::vector<MeshEntry> m_MeshEntries;   // 所有子 mesh
 		std::vector<Texture*>  m_Textures;      // 所有纹理图
 		unsigned int m_NumMeshEntries;

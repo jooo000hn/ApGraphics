@@ -20,7 +20,5 @@
 
 // shader
 #include "graphics/shader/Shader.h"
-#include "graphics/shader/ModelShader.h"
-#include "graphics/shader/PhongShader.h"
 
 #include "graphics/Material.h"

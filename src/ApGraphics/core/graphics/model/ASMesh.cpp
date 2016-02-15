@@ -43,19 +43,11 @@ namespace apanoo {
 		{
 			delete m_Textures[i];
 		}
-
-		// disable shader
-		m_Shader->disable();
-		delete m_Shader;
 	}
 
 	ASMesh::ASMesh(const std::string& filename, bool flipUVs)
 		: m_IsLoaded(false), m_NumMeshEntries(0), m_FilePath(filename)
 	{
-		// ÆôÓÃ shader
-		m_Shader = new ModelShader();
-		m_Shader->enable();
-
 		m_FlipUVs = flipUVs;
 
 		if (!loadModelFromFile(filename))

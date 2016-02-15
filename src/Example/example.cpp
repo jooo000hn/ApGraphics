@@ -33,7 +33,9 @@ public:
 		//shader = PhongShader::Instance();
 		//PhongShader::Instance()->setBaseColor(Vector3(0, 1, 1));
 		//PhongShader::Instance()->setAmbientLight(Vector3(0.4f, 0.4f, 0.4f));
-		shader = new ModelShader();
+		shader = new Shader();
+		shader->addVertexShader("../media/shaders/model.vert");
+		shader->addFragmentShader("../media/shaders/model.frag");
 		shader->enable();
 
 		trans = new Transform();
@@ -66,8 +68,8 @@ public:
 	void render() override
 	{
 		trans->setRotation(0, tme, 0);
-		shader->updateUniforms(trans->getTransformation(), trans->getProjectionTransformation());
-		//texture->bind(GL_TEXTURE0);
+		shader->setUniformMat4("transform", trans->getProjectionTransformation());
+
 		//obj->render();
 		//testMesh->render();
 		asmesh->render();
@@ -124,3 +126,4 @@ int main()
 	game.start();
 	return 0;
 }
+

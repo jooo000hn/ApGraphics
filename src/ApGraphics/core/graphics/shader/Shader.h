@@ -22,8 +22,6 @@ namespace apanoo {
 		// add fragment shader
 		void addFragmentShader(const char* filename);
 
-		void compileShader();
-
 		// ¸üÐÂ
 		virtual void updateUniforms(Matrix4 worldMatrix, Matrix4 projectedMatrix) {}
 
@@ -38,6 +36,7 @@ namespace apanoo {
 		void setUniformMat4(const GLchar* name, const Matrix4 &matrix);
 
 	private:
+		void compileShader();
 		void addProgram(const char* filename, int type);
 		GLuint getUniformLocation(const GLchar* name);
 	private:
