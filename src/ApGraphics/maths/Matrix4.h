@@ -12,6 +12,10 @@
 
 class Quaternion;
 namespace apanoo {
+
+#define EPS 1e-6
+#define CHECK_ZERO(x) (abs(x) < EPS ? 0 : x)
+
 	/*
 	* 注意：m[i][j] j表示行，i表示列
 	* 使用列主序主要是Shader中glUniformMatrix4fv第三参数决定
@@ -48,29 +52,29 @@ namespace apanoo {
 			float m20, float m21, float m22, float m23,
 			float m30, float m31, float m32, float m33)
 		{
-			// 第一列
-			(*this)[0][0] = m00;
-			(*this)[1][0] = m01;
-			(*this)[2][0] = m02;
-			(*this)[3][0] = m03;
-
-			// 第二列
-			(*this)[0][1] = m10;
-			(*this)[1][1] = m11;
-			(*this)[2][1] = m12;
-			(*this)[3][1] = m13;
-
-			// 第三列
-			(*this)[0][2] = m20;
-			(*this)[1][2] = m21;
-			(*this)[2][2] = m22;
-			(*this)[3][2] = m23;
-
-			// 第四列
-			(*this)[0][3] = m30;
-			(*this)[1][3] = m31;
-			(*this)[2][3] = m32;
-			(*this)[3][3] = m33;
+			// 第一行
+			(*this)[0][0] = CHECK_ZERO(m00);
+			(*this)[1][0] = CHECK_ZERO(m01);
+			(*this)[2][0] = CHECK_ZERO(m02);
+			(*this)[3][0] = CHECK_ZERO(m03);
+							
+			// 第二行		  
+			(*this)[0][1] = CHECK_ZERO(m10);
+			(*this)[1][1] = CHECK_ZERO(m11);
+			(*this)[2][1] = CHECK_ZERO(m12);
+			(*this)[3][1] = CHECK_ZERO(m13);
+							
+			// 第三行		
+			(*this)[0][2] = CHECK_ZERO(m20);
+			(*this)[1][2] = CHECK_ZERO(m21);
+			(*this)[2][2] = CHECK_ZERO(m22);
+			(*this)[3][2] = CHECK_ZERO(m23);
+							
+			// 第四行		  
+			(*this)[0][3] = CHECK_ZERO(m30);
+			(*this)[1][3] = CHECK_ZERO(m31);
+			(*this)[2][3] = CHECK_ZERO(m32);
+			(*this)[3][3] = CHECK_ZERO(m33);
 		}
 
 		// 使用四元数初始化矩阵

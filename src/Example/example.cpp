@@ -14,11 +14,13 @@ public:
 		//texture = nullptr;
 		m_BtnClicked = false;
 		m_RoundCamera = false;
+		testSkelton = nullptr;
 	}
 
 	~Game()
 	{
 		delete obj;
+		delete testSkelton;
 		//delete testMesh;
 		//delete shader;
 		delete trans;
@@ -40,17 +42,19 @@ public:
 
 		trans = new Transform();
 		trans->setProjection(70.0f, (float)getWindow()->getWidth(), (float)getWindow()->getHeight(), 0.1f, 10000.0f);
-		trans->setCamera();
+		trans->setCamera(Vector3(53.9406f, 59.289f, -21.057f), Vector3(-0.814f, -0.38389f, 0.435217f), Vector3(-0.338936f, 0.923378f, 0.180262f));
 
 		// test texture
 		//texture = new Texture(GL_TEXTURE_2D, "../media/textures/test.png");
-
-		trans->setTranslation(0, 0, 20);
+		
+		//trans->setTranslation(0, 0, 0);
 		//trans->setScale(0.3f, 0.3f, 0.3f);
-		//trans->setRotation(0, 0, 90);
+		//trans->setRotation(-90, -90, 0);
 
 		//obj = new OBJMesh("../media/models/box.obj");
-		asmesh = new ASMesh("../media/models/tank/tank.obj");
+		//asmesh = new ASMesh("../media/models/tank/tank.obj");
+		testSkelton = new SkeltonMesh();
+		testSkelton->LoadMesh("../media/models/bob/boblampclean.md5mesh");
 		/*testMesh = new Mesh();
 		Vertex vert[] = {
 			Vertex(0.0, 0.0, 0.0, 0.0, 0.0),
@@ -67,12 +71,24 @@ public:
 
 	void render() override
 	{
-		trans->setRotation(0, tme, 0);
-		shader->setUniformMat4("transform", trans->getProjectionTransformation());
+		//trans->setRotation(0, tme, 0);
+		shader->setUniformMat4("Transform", trans->getProjectionTransformation());
 
 		//obj->render();
 		//testMesh->render();
-		asmesh->render();
+		//asmesh->render();
+
+		std::vector<Matrix4> Transforms;
+		float RunningTime = getTimer()->elapsed();
+		testSkelton->BoneTransform(RunningTime, Transforms);
+		for (unsigned int i = 0; i < Transforms.size(); i++) 
+		{
+			char Name[128];
+			memset(Name, 0, sizeof(Name));
+			sprintf_s(Name, sizeof(Name), "gBones[%d]", i);
+			shader->setUniformMat4(Name, Transforms[i]);
+		}
+		testSkelton->Render();
 
 		if (!m_BtnClicked && getWindow()->isMouseButtonClicked(GLFW_MOUSE_BUTTON_LEFT))
 		{
@@ -103,7 +119,7 @@ public:
 		tme += 0.01f;
 		if (m_RoundCamera)
 		{
-			trans->getCamera()->update(getWindow(), 0.002f, 0.08f);
+			trans->getCamera()->update(getWindow(), 0.002f, 0.8f);
 		}
 	}
 private:
@@ -113,7 +129,8 @@ private:
 	Shader* shader;
 	Transform* trans;
 	//Texture* texture;
-	ASMesh* asmesh;
+	StaticMesh* asmesh;
+	SkeltonMesh* testSkelton;
 
 	bool m_BtnClicked;
 	bool m_RoundCamera;

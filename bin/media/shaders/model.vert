@@ -1,27 +1,35 @@
 #version 330 core
 
-layout (location = 0) in vec3 position;  
-layout (location = 1) in vec2 texCoord;  
+layout (location = 0) in vec3 Position;  
+layout (location = 1) in vec2 TexCoord;  
 layout (location = 2) in vec3 VertexNormal;  
+layout (location = 3) in ivec4 BoneIDs;
+layout (location = 4) in vec4 Weights;
 
-out vec3 LightIntensity;
 out vec2 TexCoord0;
 
-uniform vec4 LightPosition; // Light position in eye coords.
-uniform vec3 Kd;            // Diffuse reflectivity
-uniform vec3 Ld;            // Diffuse light intensity
+const int MAX_BONES = 100;
 
-uniform mat4 ModelViewMatrix;
-uniform mat3 NormalMatrix;
-uniform mat4 transform = mat4(1.0);
-
+uniform mat4 Transform = mat4(1.0);
+uniform mat4 gBones[MAX_BONES];
 
 void main()
 {
-	vec3 tnorm = normalize(NormalMatrix * VertexNormal);
-	vec4 eyeCoords = ModelViewMatrix * vec4(position, 1.0);
-	vec3 s = normalize(vec3(LightPosition - eyeCoords));
-	LightIntensity = Ld * Kd * max(dot(s,tnorm),0.0);
-	gl_Position = transform * vec4( position, 1.0);
-	TexCoord0 = texCoord;
+	// 根据权重计算骨骼变化矩阵
+	mat4 BoneTransform = gBones[BoneIDs[0]] * Weights[0];
+	BoneTransform     += gBones[BoneIDs[1]] * Weights[1];
+	BoneTransform     += gBones[BoneIDs[2]] * Weights[2];
+	BoneTransform     += gBones[BoneIDs[3]] * Weights[3];
+	
+	vec4 PosL = BoneTransform * vec4(Position, 1.0);
+	
+	// 最终位置
+	//if(PosL != 0) {
+		gl_Position = Transform * PosL;
+	//} else {
+	//	gl_Position = Transform * vec4(Position, 1.0);
+	//}
+	
+	// 纹理坐标
+	TexCoord0 = TexCoord;
 }

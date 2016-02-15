@@ -37,11 +37,11 @@ namespace apanoo {
 	/*
 	 * assimp mesh : load model files by assimp lib
 	 */
-	class ASMesh
+	class StaticMesh
 	{
 	public:
-		~ASMesh();
-		ASMesh(const std::string& filename, bool flipUVs = false);
+		~StaticMesh();
+		StaticMesh(const std::string& filename, bool flipUVs = false);
 		void render();
 
 	private:

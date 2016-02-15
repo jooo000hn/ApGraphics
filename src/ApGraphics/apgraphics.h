@@ -22,6 +22,7 @@ namespace apanoo {
 			return m_Window;
 		}
 	public:
+		inline Timer* getTimer() const { return m_Timer; }
 		void start() {
 			init();
 			run();

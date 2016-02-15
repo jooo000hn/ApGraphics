@@ -1,15 +1,15 @@
-#include "ASMesh.h"
+#include "StaticMesh.h"
 #include "../../../log/Log.h"
 
 namespace apanoo {
 	///////////////////////////////////mesh entry///////////////////////////////////////
-	ASMesh::MeshEntry::MeshEntry()
+	StaticMesh::MeshEntry::MeshEntry()
 		: m_VBO(INVALID_OGL_VALUE), m_IBO(INVALID_OGL_VALUE), m_NumIndices(0), m_MaterialIndex(INVALID_OGL_VALUE)
 	{
 
 	}
 
-	ASMesh::MeshEntry::~MeshEntry()
+	StaticMesh::MeshEntry::~MeshEntry()
 	{
 		if (m_VBO != INVALID_OGL_VALUE)
 		{
@@ -22,7 +22,7 @@ namespace apanoo {
 		}
 	}
 
-	void ASMesh::MeshEntry::init(const std::vector<Vertex>& vertices,
+	void StaticMesh::MeshEntry::init(const std::vector<Vertex>& vertices,
 		const std::vector<unsigned int>& indices)
 	{
 		m_NumIndices = indices.size();
@@ -37,7 +37,7 @@ namespace apanoo {
 	}
 
 	////////////////////////////////////assimp mesh//////////////////////////////////////
-	ASMesh::~ASMesh()
+	StaticMesh::~StaticMesh()
 	{
 		for (unsigned int i = 0; i < m_Textures.size(); i++)
 		{
@@ -45,7 +45,7 @@ namespace apanoo {
 		}
 	}
 
-	ASMesh::ASMesh(const std::string& filename, bool flipUVs)
+	StaticMesh::StaticMesh(const std::string& filename, bool flipUVs)
 		: m_IsLoaded(false), m_NumMeshEntries(0), m_FilePath(filename)
 	{
 		m_FlipUVs = flipUVs;
@@ -59,7 +59,7 @@ namespace apanoo {
 	}
 
 	// ╪сть model
-	bool ASMesh::loadModelFromFile(const std::string& filepath)
+	bool StaticMesh::loadModelFromFile(const std::string& filepath)
 	{
 		Assimp::Importer importer;
 
@@ -92,7 +92,7 @@ namespace apanoo {
 		return true;
 	}
 
-	void ASMesh::initMesh(const aiScene* pScene, const aiNode* pNode)
+	void StaticMesh::initMesh(const aiScene* pScene, const aiNode* pNode)
 	{
 		for (unsigned int n = 0; n < pNode->mNumMeshes; ++n)
 		{
@@ -139,9 +139,8 @@ namespace apanoo {
 		}
 	}
 
-	void ASMesh::render()
+	void StaticMesh::render()
 	{
-
 		if (!m_IsLoaded) 
 		{
 			return;
@@ -173,7 +172,7 @@ namespace apanoo {
 		glDisableVertexAttribArray(2);
 	}
 
-	bool ASMesh::initMaterial(const aiScene* pScene, const std::string& filePath)
+	bool StaticMesh::initMaterial(const aiScene* pScene, const std::string& filePath)
 	{
 		std::string::size_type slashIndex = filePath.find_last_of("\\/");
 		std::string dir;

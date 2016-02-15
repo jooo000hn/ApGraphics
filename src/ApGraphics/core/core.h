@@ -10,7 +10,8 @@
 #include "graphics/model/OBJMesh.h"
 
 // assimp model
-#include "graphics/model/ASMesh.h"
+#include "graphics/model/StaticMesh.h"
+#include "graphics/model/SkeltonMesh.h"
 
 // 变换：模型，视图等
 #include "graphics/Transform.h"
