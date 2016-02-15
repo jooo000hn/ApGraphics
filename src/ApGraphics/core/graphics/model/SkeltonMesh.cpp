@@ -82,10 +82,10 @@ namespace apanoo {
 		{
 			auto trans = m_pScene->mRootNode->mTransformation;
 			m_GlobalInverseTransform = Matrix4(
-					trans.a1, trans.b1, trans.c1, trans.d1,
-					trans.a2, trans.b2, trans.c2, trans.d2,
-					trans.a3, trans.b3, trans.c3, trans.d3,
-					trans.a4, trans.b4, trans.c4, trans.d4
+					trans.a1, trans.a2, trans.a3, trans.a4,
+					trans.b1, trans.b2, trans.b3, trans.b4,
+					trans.c1, trans.c2, trans.c3, trans.c4,
+					trans.d1, trans.d2, trans.d3, trans.d4
 				);
 			// m_GlobalInverseTransform = m_pScene->mRootNode->mTransformation;
 			m_GlobalInverseTransform.inverse();
@@ -231,10 +231,10 @@ namespace apanoo {
 
 				auto offset = pMesh->mBones[i]->mOffsetMatrix;
 				m_BoneInfo[BoneIndex].BoneOffset = Matrix4(
-						offset.a1, offset.b1, offset.c1, offset.d1,
-						offset.a2, offset.b2, offset.c2, offset.d2,
-						offset.a3, offset.b3, offset.c3, offset.d3,
-						offset.a4, offset.b4, offset.c4, offset.d4
+						offset.a1, offset.a2, offset.a3, offset.a4,
+						offset.b1, offset.b2, offset.b3, offset.b4,
+						offset.c1, offset.c2, offset.c3, offset.c4,
+						offset.d1, offset.d2, offset.d3, offset.d4
 					);
 				//m_BoneInfo[BoneIndex].BoneOffset = pMesh->mBones[i]->mOffsetMatrix;
 				m_BoneMapping[BoneName] = BoneIndex;
@@ -467,10 +467,10 @@ namespace apanoo {
 
 		auto nodeTrans = pNode->mTransformation;
 		Matrix4 NodeTransformation = Matrix4(
-			nodeTrans.a1, nodeTrans.b1, nodeTrans.c1, nodeTrans.d1,
-			nodeTrans.a2, nodeTrans.b2, nodeTrans.c2, nodeTrans.d2,
-			nodeTrans.a3, nodeTrans.b3, nodeTrans.c3, nodeTrans.d3,
-			nodeTrans.a4, nodeTrans.b4, nodeTrans.c4, nodeTrans.d4
+			nodeTrans.a1, nodeTrans.a2, nodeTrans.a3, nodeTrans.a4,
+			nodeTrans.b1, nodeTrans.b2, nodeTrans.b3, nodeTrans.b4,
+			nodeTrans.c1, nodeTrans.c2, nodeTrans.c3, nodeTrans.c4,
+			nodeTrans.d1, nodeTrans.d2, nodeTrans.d3, nodeTrans.d4
 			);
 		// Matrix4 NodeTransformation(pNode->mTransformation);
 
@@ -490,10 +490,10 @@ namespace apanoo {
 
 			auto rot = RotationQ.GetMatrix();
 			Matrix4 RotationM = Matrix4(
-					rot.a1, rot.b1, rot.c1, 0,
-					rot.a2, rot.b2, rot.c2, 0,
-					rot.a3, rot.b3, rot.c3, 0,
-					0     , 0     , 0     , 1
+				rot.a1, rot.a2, rot.a3, 0,
+				rot.b1, rot.b2, rot.b3, 0,
+				rot.c1, rot.c2, rot.c3, 0,
+				0     , 0     , 0     , 1
 				);
 			// Matrix4 RotationM = Matrix4(RotationQ.GetMatrix());
 

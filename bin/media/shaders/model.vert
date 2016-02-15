@@ -8,7 +8,7 @@ layout (location = 4) in vec4 Weights;
 
 out vec2 TexCoord0;
 
-const int MAX_BONES = 100;
+const int MAX_BONES = 200;
 
 uniform mat4 Transform = mat4(1.0);
 uniform mat4 gBones[MAX_BONES];
@@ -24,11 +24,11 @@ void main()
 	vec4 PosL = BoneTransform * vec4(Position, 1.0);
 	
 	// 最终位置
-	//if(PosL != 0) {
+	if(PosL != 0) {
 		gl_Position = Transform * PosL;
-	//} else {
-	//	gl_Position = Transform * vec4(Position, 1.0);
-	//}
+	} else {
+		gl_Position = Transform * vec4(Position, 1.0);
+	}
 	
 	// 纹理坐标
 	TexCoord0 = TexCoord;

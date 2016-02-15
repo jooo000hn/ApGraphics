@@ -42,19 +42,19 @@ public:
 
 		trans = new Transform();
 		trans->setProjection(70.0f, (float)getWindow()->getWidth(), (float)getWindow()->getHeight(), 0.1f, 10000.0f);
-		trans->setCamera(Vector3(53.9406f, 59.289f, -21.057f), Vector3(-0.814f, -0.38389f, 0.435217f), Vector3(-0.338936f, 0.923378f, 0.180262f));
+		trans->setCamera(Vector3(-16.0f, 40.089f, -2.057f), Vector3(0.7f, -0.63f, -0.3656f), Vector3(0.5f, 0.793378f, -0.25f));
 
 		// test texture
 		//texture = new Texture(GL_TEXTURE_2D, "../media/textures/test.png");
 		
 		//trans->setTranslation(0, 0, 0);
 		//trans->setScale(0.3f, 0.3f, 0.3f);
-		//trans->setRotation(-90, -90, 0);
+		trans->setRotation(0, 45, 0);
 
 		//obj = new OBJMesh("../media/models/box.obj");
 		//asmesh = new ASMesh("../media/models/tank/tank.obj");
 		testSkelton = new SkeltonMesh();
-		testSkelton->LoadMesh("../media/models/bob/boblampclean.md5mesh");
+		testSkelton->LoadMesh("../media/models/bob/boblampclean.md5mesh"); // bob/boblampclean.md5mesh
 		/*testMesh = new Mesh();
 		Vertex vert[] = {
 			Vertex(0.0, 0.0, 0.0, 0.0, 0.0),
@@ -111,7 +111,10 @@ public:
 
 	void tick() override
 	{
-		std::cout << this->getFPS() << std::endl;
+		//std::cout << this->getFPS() << std::endl;
+		std::cout << "pos: " << trans->getCamera()->getPosition() ;
+		std::cout << "for: " << trans->getCamera()->getForward() ;
+		std::cout << "upt: " << trans->getCamera()->getUp() << std::endl;
 	}
 	
 	void update() override
