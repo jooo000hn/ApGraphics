@@ -21,10 +21,12 @@
   <ItemGroup>
     <ClCompile Include="ApGraphics\core\graphics\Camera.cpp" />
     <ClCompile Include="ApGraphics\core\graphics\Material.cpp" />
+    <ClCompile Include="ApGraphics\core\graphics\model\md5\MD5Anim.cpp" />
+    <ClCompile Include="ApGraphics\core\graphics\model\md5\MD5Model.cpp" />
     <ClCompile Include="ApGraphics\core\graphics\model\StaticMesh.cpp" />
     <ClCompile Include="ApGraphics\core\graphics\model\Mesh.cpp" />
     <ClCompile Include="ApGraphics\core\graphics\model\OBJMesh.cpp" />
-    <ClCompile Include="ApGraphics\core\graphics\model\SkeltonMesh.cpp" />
+    <ClCompile Include="ApGraphics\core\graphics\model\AnimationMesh.cpp" />
     <ClCompile Include="ApGraphics\core\graphics\shader\Shader.cpp" />
     <ClCompile Include="ApGraphics\core\graphics\Texture.cpp" />
     <ClCompile Include="ApGraphics\core\graphics\Transform.cpp" />
@@ -42,10 +44,13 @@
     <ClInclude Include="ApGraphics\core\core.h" />
     <ClInclude Include="ApGraphics\core\graphics\Camera.h" />
     <ClInclude Include="ApGraphics\core\graphics\Material.h" />
+    <ClInclude Include="ApGraphics\core\graphics\model\md5\helper.h" />
+    <ClInclude Include="ApGraphics\core\graphics\model\md5\MD5Anim.h" />
+    <ClInclude Include="ApGraphics\core\graphics\model\md5\MD5Model.h" />
     <ClInclude Include="ApGraphics\core\graphics\model\StaticMesh.h" />
     <ClInclude Include="ApGraphics\core\graphics\model\Mesh.h" />
     <ClInclude Include="ApGraphics\core\graphics\model\OBJMesh.h" />
-    <ClInclude Include="ApGraphics\core\graphics\model\SkeltonMesh.h" />
+    <ClInclude Include="ApGraphics\core\graphics\model\AnimationMesh.h" />
     <ClInclude Include="ApGraphics\core\graphics\shader\Shader.h" />
     <ClInclude Include="ApGraphics\core\graphics\Texture.h" />
     <ClInclude Include="ApGraphics\core\graphics\Transform.h" />

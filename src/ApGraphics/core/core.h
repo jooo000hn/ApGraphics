@@ -11,7 +11,9 @@
 
 // assimp model
 #include "graphics/model/StaticMesh.h"
-#include "graphics/model/SkeltonMesh.h"
+#include "graphics/model/AnimationMesh.h"
+
+#include "graphics/model/md5/MD5Model.h"
 
 // 变换：模型，视图等
 #include "graphics/Transform.h"

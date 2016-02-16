@@ -8,7 +8,7 @@ layout (location = 4) in vec4 Weights;
 
 out vec2 TexCoord0;
 
-const int MAX_BONES = 200;
+const int MAX_BONES = 100;
 
 uniform mat4 Transform = mat4(1.0);
 uniform mat4 gBones[MAX_BONES];

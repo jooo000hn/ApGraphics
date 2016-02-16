@@ -20,12 +20,12 @@
 #include <assimp/postprocess.h>
 
 namespace apanoo {
-	class SkeltonMesh
+	class AnimationMesh
 	{
 	public:
-		SkeltonMesh();
+		AnimationMesh();
 
-		~SkeltonMesh();
+		~AnimationMesh();
 
 		bool LoadMesh(const std::string& Filename);
 

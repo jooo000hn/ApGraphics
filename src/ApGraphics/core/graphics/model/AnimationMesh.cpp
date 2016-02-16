@@ -1,4 +1,4 @@
-#include "SkeltonMesh.h"
+#include "AnimationMesh.h"
 
 #define POSITION_LOCATION    0
 #define TEX_COORD_LOCATION   1
@@ -7,7 +7,7 @@
 #define BONE_WEIGHT_LOCATION 4
 
 namespace apanoo {
-	void SkeltonMesh::VertexBoneData::AddBoneData(unsigned int BoneID, float Weight)
+	void AnimationMesh::VertexBoneData::AddBoneData(unsigned int BoneID, float Weight)
 	{
 		for (unsigned int i = 0; i < sizeof(IDs) / sizeof(IDs[0]); i++) 
 		{
@@ -23,7 +23,7 @@ namespace apanoo {
 		assert(0);
 	}
 
-	SkeltonMesh::SkeltonMesh()
+	AnimationMesh::AnimationMesh()
 	{
 		m_VAO = 0;
 		memset(m_Buffers, 0, sizeof(m_Buffers));
@@ -32,13 +32,13 @@ namespace apanoo {
 	}
 
 
-	SkeltonMesh::~SkeltonMesh()
+	AnimationMesh::~AnimationMesh()
 	{
 		Clear();
 	}
 
 
-	void SkeltonMesh::Clear()
+	void AnimationMesh::Clear()
 	{
 		for (unsigned int i = 0; i < m_Textures.size(); i++) 
 		{
@@ -62,7 +62,7 @@ namespace apanoo {
 	}
 
 
-	bool SkeltonMesh::LoadMesh(const std::string& Filename)
+	bool AnimationMesh::LoadMesh(const std::string& Filename)
 	{
 		// Release the previously loaded mesh (if it exists)
 		Clear();
@@ -103,7 +103,7 @@ namespace apanoo {
 	}
 
 
-	bool SkeltonMesh::InitFromScene(const aiScene* pScene, const std::string& Filename)
+	bool AnimationMesh::InitFromScene(const aiScene* pScene, const std::string& Filename)
 	{
 		m_Entries.resize(pScene->mNumMeshes);
 		m_Textures.resize(pScene->mNumMaterials);
@@ -178,7 +178,7 @@ namespace apanoo {
 	}
 
 
-	void SkeltonMesh::InitMesh(unsigned int MeshIndex,
+	void AnimationMesh::InitMesh(unsigned int MeshIndex,
 		const aiMesh* paiMesh,
 		std::vector<Vector3>& Positions,
 		std::vector<Vector3>& Normals,
@@ -214,7 +214,7 @@ namespace apanoo {
 	}
 
 
-	void SkeltonMesh::LoadBones(unsigned int MeshIndex, const aiMesh* pMesh, std::vector<VertexBoneData>& Bones)
+	void AnimationMesh::LoadBones(unsigned int MeshIndex, const aiMesh* pMesh, std::vector<VertexBoneData>& Bones)
 	{
 		for (unsigned int i = 0; i < pMesh->mNumBones; i++) 
 		{
@@ -254,7 +254,7 @@ namespace apanoo {
 	}
 
 
-	bool SkeltonMesh::InitMaterials(const aiScene* pScene, const std::string& Filename)
+	bool AnimationMesh::InitMaterials(const aiScene* pScene, const std::string& Filename)
 	{
 		// Extract the directory part from the file name
 		std::string::size_type SlashIndex = Filename.find_last_of("/");
@@ -317,7 +317,7 @@ namespace apanoo {
 	}
 
 
-	void SkeltonMesh::Render()
+	void AnimationMesh::Render()
 	{
 		glBindVertexArray(m_VAO);
 
@@ -344,7 +344,7 @@ namespace apanoo {
 	}
 
 
-	unsigned int SkeltonMesh::FindPosition(float AnimationTime, const aiNodeAnim* pNodeAnim)
+	unsigned int AnimationMesh::FindPosition(float AnimationTime, const aiNodeAnim* pNodeAnim)
 	{
 		for (unsigned int i = 0; i < pNodeAnim->mNumPositionKeys - 1; i++) 
 		{
@@ -360,7 +360,7 @@ namespace apanoo {
 	}
 
 
-	unsigned int SkeltonMesh::FindRotation(float AnimationTime, const aiNodeAnim* pNodeAnim)
+	unsigned int AnimationMesh::FindRotation(float AnimationTime, const aiNodeAnim* pNodeAnim)
 	{
 		assert(pNodeAnim->mNumRotationKeys > 0);
 
@@ -378,7 +378,7 @@ namespace apanoo {
 	}
 
 
-	unsigned int SkeltonMesh::FindScaling(float AnimationTime, const aiNodeAnim* pNodeAnim)
+	unsigned int AnimationMesh::FindScaling(float AnimationTime, const aiNodeAnim* pNodeAnim)
 	{
 		assert(pNodeAnim->mNumScalingKeys > 0);
 
@@ -396,7 +396,7 @@ namespace apanoo {
 	}
 
 
-	void SkeltonMesh::CalcInterpolatedPosition(aiVector3D& Out, float AnimationTime, const aiNodeAnim* pNodeAnim)
+	void AnimationMesh::CalcInterpolatedPosition(aiVector3D& Out, float AnimationTime, const aiNodeAnim* pNodeAnim)
 	{
 		if (pNodeAnim->mNumPositionKeys == 1) 
 		{
@@ -417,7 +417,7 @@ namespace apanoo {
 	}
 
 
-	void SkeltonMesh::CalcInterpolatedRotation(aiQuaternion& Out, float AnimationTime, const aiNodeAnim* pNodeAnim)
+	void AnimationMesh::CalcInterpolatedRotation(aiQuaternion& Out, float AnimationTime, const aiNodeAnim* pNodeAnim)
 	{
 		// we need at least two values to interpolate...
 		if (pNodeAnim->mNumRotationKeys == 1) 
@@ -439,7 +439,7 @@ namespace apanoo {
 	}
 
 
-	void SkeltonMesh::CalcInterpolatedScaling(aiVector3D& Out, float AnimationTime, const aiNodeAnim* pNodeAnim)
+	void AnimationMesh::CalcInterpolatedScaling(aiVector3D& Out, float AnimationTime, const aiNodeAnim* pNodeAnim)
 	{
 		if (pNodeAnim->mNumScalingKeys == 1) 
 		{
@@ -459,7 +459,7 @@ namespace apanoo {
 		Out = Start + Factor * Delta;
 	}
 
-	void SkeltonMesh::ReadNodeHeirarchy(float AnimationTime, const aiNode* pNode, const Matrix4& ParentTransform)
+	void AnimationMesh::ReadNodeHeirarchy(float AnimationTime, const aiNode* pNode, const Matrix4& ParentTransform)
 	{
 		std::string NodeName(pNode->mName.data);
 
@@ -521,7 +521,7 @@ namespace apanoo {
 		}
 	}
 
-	void SkeltonMesh::BoneTransform(float TimeInSeconds, std::vector<Matrix4>& Transforms)
+	void AnimationMesh::BoneTransform(float TimeInSeconds, std::vector<Matrix4>& Transforms)
 	{
 		Matrix4 Identity = Matrix4().identityMatrix();
 		// Identity.InitIdentity();
@@ -539,7 +539,7 @@ namespace apanoo {
 		}
 	}
 
-	const aiNodeAnim* SkeltonMesh::FindNodeAnim(const aiAnimation* pAnimation, const std::string NodeName)
+	const aiNodeAnim* AnimationMesh::FindNodeAnim(const aiAnimation* pAnimation, const std::string NodeName)
 	{
 		for (unsigned int i = 0; i < pAnimation->mNumChannels; i++) 
 		{
