@@ -25,3 +25,5 @@
 #include "graphics/shader/Shader.h"
 
 #include "graphics/Material.h"
+
+#include "message/MessageMgr.h"
